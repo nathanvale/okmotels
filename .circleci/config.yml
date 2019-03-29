@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:8.10.0
+    working_directory: ~/myDirectory
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/myDirectory
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
+      - run: yarn build
+      - persist_to_workspace:
+          root: .
+          paths: dist
+  deploy:
+    docker:
+      # specify the version you desire here
+      - image: cibuilds/aws:latest
+    working_directory: ~/myDirectory
+    steps:
+      - attach_workspace:
+          at: ~/myDirectory
+      - deploy:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: |
+            aws s3 cp dist/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
