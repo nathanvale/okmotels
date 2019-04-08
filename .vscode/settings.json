@@ -1,0 +1,20 @@
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.nodePath": "node_modules/easy-scripts/node_modules",
+  "eslint.provideLintTask": true,
+  "prettier.requireConfig": true,
+  "prettier.eslintIntegration": true
+}

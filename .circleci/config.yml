@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  validate:
     docker:
       # specify the version you desire here
       - image: circleci/node:8.10.0
@@ -17,18 +17,16 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install
+      - run: yarn install --frozen-lockfile
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test
-      - run: yarn build
+      - run: yarn validate
       - persist_to_workspace:
           root: .
-          paths: dist
+          paths: public
   deploy:
     docker:
       # specify the version you desire here
@@ -40,16 +38,16 @@ jobs:
       - deploy:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
-            aws s3 cp dist/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
+            aws s3 cp public/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
+      - validate
       - deploy:
           filters:
             branches:
               only: master
           requires:
-            - build
+            - validate
