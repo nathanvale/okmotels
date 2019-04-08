@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  validate:
     docker:
       # specify the version you desire here
       - image: circleci/node:8.10.0
@@ -23,9 +23,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test
-      - run: yarn build
+      - run: yarn validate
       - persist_to_workspace:
           root: .
           paths: public
@@ -46,10 +44,10 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
+      - validate
       - deploy:
           filters:
             branches:
               only: master
           requires:
-            - build
+            - validate
