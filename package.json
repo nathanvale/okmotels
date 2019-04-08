@@ -29,7 +29,7 @@
     "extends": "./node_modules/easy-scripts/dist/config/eslintrc.js",
     "rules": {
       "react/prop-types": "off",
-      "jsx-a11y/label-has-for":"off"
+      "jsx-a11y/label-has-for": "off"
     }
   },
   "jest": {
