@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -247,10 +246,6 @@ class ContactForm extends React.Component {
       </Form>
     )
   }
-}
-
-ContactForm.propTypes = {
-  data: PropTypes.object,
 }
 
 export default ContactForm

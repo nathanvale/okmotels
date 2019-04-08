@@ -28,7 +28,8 @@
   "eslintConfig": {
     "extends": "./node_modules/easy-scripts/dist/config/eslintrc.js",
     "rules": {
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "jsx-a11y/label-has-for":"off"
     }
   },
   "jest": {
@@ -78,7 +79,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "styled-components": "^4.1.3"
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^16.8.8",
@@ -86,11 +87,11 @@
     "easy-scripts": "^2.3.12",
     "react-scripts": "^2.1.8",
     "react-testing-library": "^6.0.0",
-    "stylelint": "9.9.0",
-    "stylelint-config-prettier": "^4.0.0",
+    "stylelint": "9.10.1",
+    "stylelint-config-prettier": "^5.0.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.5.1",
+    "stylelint-processor-styled-components": "^1.6.0",
     "typescript": "^3.3.3"
   }
 }

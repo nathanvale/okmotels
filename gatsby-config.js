@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable babel/camelcase */
 const config = require('./src/utils/siteConfig')
 
 let contentfulConfig
@@ -23,13 +25,10 @@ module.exports = {
   siteMetadata: {
     siteUrl: config.siteUrl,
     rssMetadata: {
-      // eslint-disable-next-line babel/camelcase
       site_url: config.siteUrl,
-      // eslint-disable-next-line babel/camelcase
       feed_url: `${config.siteUrl}/rss.xml`,
       title: config.siteTitle,
       description: config.siteDescription,
-      // eslint-disable-next-line babel/camelcase
       image_url: `${config.siteUrl}${config.siteLogo}`,
       author: config.author,
       copyright: config.copyright,
@@ -83,14 +82,14 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: config.siteTitle,
-        // eslint-disable-next-line babel/camelcase
+
         short_name: config.shortTitle,
         description: config.siteDescription,
-        // eslint-disable-next-line babel/camelcase
+
         start_url: '/',
-        // eslint-disable-next-line babel/camelcase
+
         background_color: config.backgroundColor,
-        // eslint-disable-next-line babel/camelcase
+
         theme_color: config.themeColor,
         display: 'minimal-ui',
         icon: `static${config.siteLogo}`,
@@ -134,7 +133,7 @@ module.exports = {
 
                 url: `${rssMetadata.site_url}/${edge.node.slug}`,
                 guid: `${rssMetadata.site_url}/${edge.node.slug}`,
-                // eslint-disable-next-line babel/camelcase
+
                 custom_elements: [
                   {
                     'content:encoded': edge.node.body.childMarkdownRemark.html,
