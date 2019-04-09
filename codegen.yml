@@ -1,0 +1,8 @@
+schema: http://localhost:8000/___graphql
+generates:
+  ./types/graphql.d.ts:
+    plugins:
+      - typescript
+    config:
+      enumsAsTypes: true
+      immutableTypes: true

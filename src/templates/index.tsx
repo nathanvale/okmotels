@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
@@ -8,8 +9,13 @@ import Container from '../components/Container'
 import Pagination from '../components/Pagination'
 import Seo from '../components/SEO'
 import config from '../utils/siteConfig'
+import {ContentfulPost} from '../../types/graphql'
 
-const Index = ({data, pageContext}) => {
+interface Props {
+  data: ContentfulPost
+  pageContext: any
+}
+const Index: React.SFC<Props> = ({data, pageContext}): JSX.Element => {
   const posts = data.allContentfulPost.edges
   const featuredPost = posts[0].node
   const {currentPage} = pageContext
@@ -27,13 +33,13 @@ const Index = ({data, pageContext}) => {
         {isFirstPage ? (
           <CardList>
             <Card {...featuredPost} featured />
-            {posts.slice(1).map(({node: post}) => (
+            {posts.slice(1).map(({node: post}: any) => (
               <Card key={post.id} {...post} />
             ))}
           </CardList>
         ) : (
           <CardList>
-            {posts.map(({node: post}) => (
+            {posts.map(({node: post}: any) => (
               <Card key={post.id} {...post} />
             ))}
           </CardList>
@@ -75,4 +81,5 @@ export const query = graphql`
   }
 `
 
+// eslint-disable-next-line import/no-default-export
 export default Index

@@ -36,6 +36,14 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTSX: false,
+        jsxPragma: `React`,
+        allExtensions: false,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
         siteUrl: config.siteUrl,

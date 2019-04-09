@@ -19,12 +19,31 @@
       "post-rewrite": "easy-scripts pre-commit"
     }
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "babel": {
+    "presets": [
+      [
+        "babel-preset-gatsby",
+        {
+          "targets": {
+            "browsers": [
+              ">0.25%",
+              "not dead"
+            ]
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "babel-plugin-styled-components",
+        {
+          "displayName": true,
+          "ssr": false,
+          "pure": true
+        }
+      ]
+    ]
+  },
   "eslintConfig": {
     "extends": "./node_modules/easy-scripts/dist/config/eslintrc.js",
     "rules": {
@@ -47,7 +66,7 @@
     ]
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.0",
+    "@babel/runtime": "^7.4.3",
     "babel-plugin-styled-components": "^1.10.0",
     "chalk": "^2.4.1",
     "contentful-import": "^7.4.3",
@@ -64,6 +83,7 @@
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-sitemap": "^2.0.3",
     "gatsby-plugin-styled-components": "^3.0.4",
+    "gatsby-plugin-typescript": "^2.0.12",
     "gatsby-remark-autolink-headers": "^2.0.12",
     "gatsby-remark-images-contentful": "^2.0.5",
     "gatsby-remark-prismjs": "^3.1.4",
@@ -79,12 +99,16 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "typed-graphqlify": "^2.2.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.0.7",
+    "@graphql-codegen/typescript": "^1.0.7",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
-    "easy-scripts": "^2.3.12",
+    "easy-scripts": "^2.4.0",
+    "graphql": "^14.2.1",
     "react-scripts": "^2.1.8",
     "react-testing-library": "^6.0.0",
     "stylelint": "9.10.1",
