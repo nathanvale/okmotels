@@ -2,8 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'gatsby'
 import Img from 'gatsby-image'
+import {Maybe, ContentfulAsset, MarkdownRemark} from '../graphql'
 
-const Post = styled.li`
+import {Fluid} from '../types'
+
+//extends Pick<ContentfulPost, 'title' | 'id' | 'slug' | 'publishDate'>
+interface Props {
+  featured?: boolean
+  // heroImage: Maybe<Pick<ContentfulAsset, 'title'> & {fluid: Fluid}>
+  // body: Maybe<{
+  //   childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html' | 'excerpt'>>
+  // }>
+}
+
+const Post = styled.li<Props>`
   position: relative;
   border: 1px solid ${props => props.theme.colors.secondary};
   border-radius: 2px;
@@ -54,16 +66,26 @@ const Excerpt = styled.p`
   line-height: 1.6;
 `
 
-const Card = ({slug, heroImage, title, publishDate, body, ...props}) => {
+const Card: React.SFC<Props> = ({
+  slug,
+  heroImage,
+  title,
+  publishDate,
+  body,
+  ...props
+}): JSX.Element => {
   return (
     <Post featured={props.featured}>
       <Link to={`/${slug}/`}>
-        <Img fluid={heroImage.fluid} backgroundColor="#eeeeee" />
+        <Img fluid={heroImage && heroImage.fluid} backgroundColor="#eeeeee" />
         <Title>{title}</Title>
         <Date>{publishDate}</Date>
         <Excerpt
           dangerouslySetInnerHTML={{
-            __html: body.childMarkdownRemark.excerpt,
+            __html:
+              body &&
+              body.childMarkdownRemark &&
+              body.childMarkdownRemark.excerpt,
           }}
         />
       </Link>

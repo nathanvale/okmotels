@@ -20,6 +20,16 @@
     }
   },
   "babel": {
+    "plugins": [
+      [
+        "babel-plugin-styled-components",
+        {
+          "displayName": true,
+          "ssr": false,
+          "pure": true
+        }
+      ]
+    ],
     "presets": [
       [
         "babel-preset-gatsby",
@@ -32,16 +42,6 @@
           }
         }
       ]
-    ],
-    "plugins": [
-      [
-        "babel-plugin-styled-components",
-        {
-          "displayName": true,
-          "ssr": false,
-          "pure": true
-        }
-      ]
     ]
   },
   "eslintConfig": {
@@ -51,6 +51,13 @@
       "jsx-a11y/label-has-for": "off"
     }
   },
+  "eslintIgnore": [
+    "public",
+    "static",
+    ".cache",
+    "coverage",
+    "src/graphql.d.ts"
+  ],
   "jest": {
     "coverageThreshold": {
       "global": {
@@ -105,8 +112,10 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^1.0.7",
     "@graphql-codegen/typescript": "^1.0.7",
+    "@graphql-codegen/typescript-operations": "^1.0.7",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
+    "@types/styled-components": "^4.1.14",
     "easy-scripts": "^2.4.0",
     "graphql": "^14.2.1",
     "react-scripts": "^2.1.8",

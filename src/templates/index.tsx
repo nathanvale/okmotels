@@ -9,15 +9,16 @@ import Container from '../components/Container'
 import Pagination from '../components/Pagination'
 import Seo from '../components/SEO'
 import config from '../utils/siteConfig'
-import {ContentfulPost} from '../../types/graphql'
+import {IndexQuery} from '../graphql'
 
 interface Props {
-  data: ContentfulPost
+  data: IndexQuery
   pageContext: any
 }
+
 const Index: React.SFC<Props> = ({data, pageContext}): JSX.Element => {
-  const posts = data.allContentfulPost.edges
-  const featuredPost = posts[0].node
+  const posts = data.allContentfulPost && data.allContentfulPost.edges
+  const featuredPost = posts && posts[0].node
   const {currentPage} = pageContext
   const isFirstPage = currentPage === 1
 
@@ -33,15 +34,15 @@ const Index: React.SFC<Props> = ({data, pageContext}): JSX.Element => {
         {isFirstPage ? (
           <CardList>
             <Card {...featuredPost} featured />
-            {posts.slice(1).map(({node: post}: any) => (
-              <Card key={post.id} {...post} />
-            ))}
+            {posts &&
+              posts
+                .slice(1)
+                .map(({node: post}) => <Card key={post.id} {...post} />)}
           </CardList>
         ) : (
           <CardList>
-            {posts.map(({node: post}: any) => (
-              <Card key={post.id} {...post} />
-            ))}
+            {posts &&
+              posts.map(({node: post}) => <Card key={post.id} {...post} />)}
           </CardList>
         )}
       </Container>
@@ -51,7 +52,7 @@ const Index: React.SFC<Props> = ({data, pageContext}): JSX.Element => {
 }
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
+  query Index($skip: Int!, $limit: Int!) {
     allContentfulPost(
       sort: {fields: [publishDate], order: DESC}
       limit: $limit
@@ -66,7 +67,12 @@ export const query = graphql`
           heroImage {
             title
             fluid(maxWidth: 1800) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
+              aspectRatio
+              src
+              srcSet
+              srcWebp
+              srcSetWebp
+              sizes
             }
           }
           body {

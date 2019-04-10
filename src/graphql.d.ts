@@ -3302,6 +3302,11 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___maxWidth'
   | 'pluginCreator___pluginOptions___backgroundColor'
   | 'pluginCreator___pluginOptions___linkImagesToOriginal'
+  | 'pluginCreator___pluginOptions___wrapperStyle'
+  | 'pluginCreator___pluginOptions___showCaptions'
+  | 'pluginCreator___pluginOptions___pathPrefix'
+  | 'pluginCreator___pluginOptions___withWebp'
+  | 'pluginCreator___pluginOptions___sizes'
   | 'pluginCreator___pluginOptions___host'
   | 'pluginCreator___pluginOptions___spaceId'
   | 'pluginCreator___pluginOptions___accessToken'
@@ -3515,6 +3520,11 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginOptions___maxWidth'
   | 'pluginOptions___plugins___pluginOptions___backgroundColor'
   | 'pluginOptions___plugins___pluginOptions___linkImagesToOriginal'
+  | 'pluginOptions___plugins___pluginOptions___wrapperStyle'
+  | 'pluginOptions___plugins___pluginOptions___showCaptions'
+  | 'pluginOptions___plugins___pluginOptions___pathPrefix'
+  | 'pluginOptions___plugins___pluginOptions___withWebp'
+  | 'pluginOptions___plugins___pluginOptions___sizes'
   | 'pluginOptions___plugins___browserAPIs'
   | 'pluginOptions___plugins___ssrAPIs'
   | 'pluginOptions___plugins___pluginFilepath'
@@ -3525,6 +3535,11 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___maxWidth'
   | 'pluginOptions___backgroundColor'
   | 'pluginOptions___linkImagesToOriginal'
+  | 'pluginOptions___wrapperStyle'
+  | 'pluginOptions___showCaptions'
+  | 'pluginOptions___pathPrefix'
+  | 'pluginOptions___withWebp'
+  | 'pluginOptions___sizes'
   | 'pluginOptions___host'
   | 'pluginOptions___spaceId'
   | 'pluginOptions___accessToken'
@@ -3680,6 +3695,11 @@ export type SitePluginPluginOptions = {
   readonly maxWidth?: Maybe<Scalars['Int']>
   readonly backgroundColor?: Maybe<Scalars['String']>
   readonly linkImagesToOriginal?: Maybe<Scalars['Boolean']>
+  readonly wrapperStyle?: Maybe<Scalars['String']>
+  readonly showCaptions?: Maybe<Scalars['Boolean']>
+  readonly pathPrefix?: Maybe<Scalars['String']>
+  readonly withWebp?: Maybe<Scalars['Boolean']>
+  readonly sizes?: Maybe<Scalars['String']>
   readonly host?: Maybe<Scalars['String']>
   readonly spaceId?: Maybe<Scalars['String']>
   readonly accessToken?: Maybe<Scalars['String']>
@@ -3723,6 +3743,11 @@ export type SitePluginPluginOptionsFilterInput = {
   readonly maxWidth?: Maybe<IntQueryOperatorInput>
   readonly backgroundColor?: Maybe<StringQueryOperatorInput>
   readonly linkImagesToOriginal?: Maybe<BooleanQueryOperatorInput>
+  readonly wrapperStyle?: Maybe<StringQueryOperatorInput>
+  readonly showCaptions?: Maybe<BooleanQueryOperatorInput>
+  readonly pathPrefix?: Maybe<StringQueryOperatorInput>
+  readonly withWebp?: Maybe<BooleanQueryOperatorInput>
+  readonly sizes?: Maybe<StringQueryOperatorInput>
   readonly host?: Maybe<StringQueryOperatorInput>
   readonly spaceId?: Maybe<StringQueryOperatorInput>
   readonly accessToken?: Maybe<StringQueryOperatorInput>
@@ -3775,12 +3800,22 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   readonly maxWidth?: Maybe<Scalars['Int']>
   readonly backgroundColor?: Maybe<Scalars['String']>
   readonly linkImagesToOriginal?: Maybe<Scalars['Boolean']>
+  readonly wrapperStyle?: Maybe<Scalars['String']>
+  readonly showCaptions?: Maybe<Scalars['Boolean']>
+  readonly pathPrefix?: Maybe<Scalars['String']>
+  readonly withWebp?: Maybe<Scalars['Boolean']>
+  readonly sizes?: Maybe<Scalars['String']>
 }
 
 export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   readonly maxWidth?: Maybe<IntQueryOperatorInput>
   readonly backgroundColor?: Maybe<StringQueryOperatorInput>
   readonly linkImagesToOriginal?: Maybe<BooleanQueryOperatorInput>
+  readonly wrapperStyle?: Maybe<StringQueryOperatorInput>
+  readonly showCaptions?: Maybe<BooleanQueryOperatorInput>
+  readonly pathPrefix?: Maybe<StringQueryOperatorInput>
+  readonly withWebp?: Maybe<BooleanQueryOperatorInput>
+  readonly sizes?: Maybe<StringQueryOperatorInput>
 }
 
 export type SitePluginSortInput = {
@@ -3844,4 +3879,40 @@ export type WordCountFilterInput = {
   readonly paragraphs?: Maybe<IntQueryOperatorInput>
   readonly sentences?: Maybe<IntQueryOperatorInput>
   readonly words?: Maybe<IntQueryOperatorInput>
+}
+export type IndexQueryVariables = {
+  skip: Scalars['Int']
+  limit: Scalars['Int']
+}
+
+export type IndexQuery = {
+  readonly allContentfulPost: Maybe<{
+    readonly edges: ReadonlyArray<{
+      readonly node: Pick<
+        ContentfulPost,
+        'title' | 'id' | 'slug' | 'publishDate'
+      > & {
+        readonly heroImage: Maybe<
+          Pick<ContentfulAsset, 'title'> & {
+            readonly fluid: Maybe<
+              Pick<
+                ContentfulFluid,
+                | 'aspectRatio'
+                | 'src'
+                | 'srcSet'
+                | 'srcWebp'
+                | 'srcSetWebp'
+                | 'sizes'
+              >
+            >
+          }
+        >
+        readonly body: Maybe<{
+          readonly childMarkdownRemark: Maybe<
+            Pick<MarkdownRemark, 'html' | 'excerpt'>
+          >
+        }>
+      }
+    }>
+  }>
 }

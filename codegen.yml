@@ -1,8 +1,11 @@
 schema: http://localhost:8000/___graphql
+documents: 'src/**/*.tsx'
 generates:
-  ./types/graphql.d.ts:
+  ./src/graphql.d.ts:
     plugins:
       - typescript
+      - typescript-operations
     config:
       enumsAsTypes: true
       immutableTypes: true
+      skipTypename: true

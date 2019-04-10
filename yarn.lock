@@ -1280,7 +1280,17 @@
     import-from "2.1.0"
     tslib "1.9.3"
 
-"@graphql-codegen/typescript@^1.0.7":
+"@graphql-codegen/typescript-operations@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-1.0.7.tgz#b04ffe35feac000ac7e0fcd71f646cfb0e2f0754"
+  integrity sha512-LyyRCEB/6VAKWyatGVyAqj0aE8xJbhjtCcKApJmykr89RrVpwk+9pI+cyOoqUIssQAHnLsCfL1tq5lmjcXikHg==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "1.0.7"
+    "@graphql-codegen/typescript" "1.0.7"
+    "@graphql-codegen/visitor-plugin-common" "1.0.7"
+    tslib "1.9.3"
+
+"@graphql-codegen/typescript@1.0.7", "@graphql-codegen/typescript@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-1.0.7.tgz#76437247413ab611fe58c058c1760bf5ff110a8e"
   integrity sha512-V3xyJnknVYNZn/LO47j9+HQoOJa/vGVcm5jo3INIi54V7l3X5apHJX+Pej8Wpw9hS4+NmHrtWQ51HkEqh7BmKg==
@@ -1741,12 +1751,29 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.57.42"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.42.tgz#06ad92cd1378146402b7667de13cb7b935d194d6"
+  integrity sha512-Ms4RI8Oyi8HOIwlteFhgRE7TA9chP/mliLeJCzjKBOywYpile5TrXQF8lRDYzcC1zyTyoopu/u8VMlF+FS7VnA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.8.8":
   version "16.8.10"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.10.tgz#1ccb6fde17f71a62ef055382ec68bdc379d4d8d9"
   integrity sha512-7bUQeZKP4XZH/aB4i7k1i5yuwymDu/hnLMhD9NjVZvQQH7ZUgRN3d6iu8YXzx4sN/tNr0bj8jgguk8hhObzGvA==
   dependencies:
     "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/styled-components@^4.1.14":
+  version "4.1.14"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-4.1.14.tgz#fe029b0bfb2d26af7f9bd4dd4811b31961ff6d49"
+  integrity sha512-X5t+uomPU9vxWNnfEpw2W7RtJDpsWCsBizQq95gB2QXrG5qsALV1/H7tfv4xYhTmiG5CGtcbfp4nU4yhhEqTsw==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
     csstype "^2.2.0"
 
 "@types/tapable@1.0.2":
