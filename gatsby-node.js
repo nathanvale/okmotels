@@ -60,7 +60,7 @@ exports.createPages = ({graphql, actions}) => {
         const next = i === posts.length - 1 ? null : posts[i + 1].node
         createPage({
           path: `${edge.node.slug}/`,
-          component: path.resolve(`./src/templates/post.js`),
+          component: path.resolve(`./src/templates/post.tsx`),
           context: {
             slug: edge.node.slug,
             prev,
@@ -131,7 +131,7 @@ exports.createPages = ({graphql, actions}) => {
       pages.map(({node}) => {
         return createPage({
           path: `${node.slug}/`,
-          component: path.resolve(`./src/templates/page.js`),
+          component: path.resolve(`./src/templates/page.tsx`),
           context: {
             slug: node.slug,
           },

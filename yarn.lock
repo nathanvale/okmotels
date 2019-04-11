@@ -1751,6 +1751,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-helmet@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-5.0.8.tgz#f080eea6652e44f60b4574463d238f268d81d9af"
+  integrity sha512-ZTr12eDAYI0yUiMx1K82EHqRYa8J1BOOLus+0gL+AkksUiIPwLE0wLiXa9FNqD8r9GXAi+yRPZImkRh1JNlTkQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@*":
   version "0.57.42"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.42.tgz#06ad92cd1378146402b7667de13cb7b935d194d6"
@@ -2873,6 +2880,11 @@ babel-plugin-dynamic-import-node@^1.2.0:
   integrity sha512-yeDwKaLgGdTpXL7RgGt5r6T4LmnTza/hUn5Ul8uZSGGMtEjYo13Nxai7SQaGCTEzUtg9Zq9qJn0EjEr7SeSlTQ==
   dependencies:
     babel-plugin-syntax-dynamic-import "^6.18.0"
+
+babel-plugin-idx@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-idx/-/babel-plugin-idx-2.4.0.tgz#5d144eb337fb22c4bf1ff75cb2e1c051a76a0323"
+  integrity sha512-+rEYZgSCLh0suJDlgZ64isSLhDW7Qxu6AnUMGhl/mW1kyYvfwqLqsDmgj3e5QXH0oX7A4Hq2x0BgqdU8tiuo5A==
 
 babel-plugin-istanbul@^4.1.6:
   version "4.1.6"
@@ -9222,6 +9234,11 @@ identity-obj-proxy@3.0.0:
   integrity sha1-lNK9qWCERT7zb7xarsN+D3nx/BQ=
   dependencies:
     harmony-reflect "^1.4.6"
+
+idx@^2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/idx/-/idx-2.5.5.tgz#609a011b7c9e092380f30908389d64ecd1102f70"
+  integrity sha512-pp6pulm8tbJag/Z3PXTq+PMfjlWTavze4hp/ajH9hQdNql62kuTHhzn9AP0buQ4n80zJlgaBeruWvGcA5DUdIw==
 
 ieee754@^1.1.4:
   version "1.1.13"
@@ -16333,6 +16350,11 @@ scheduler@^0.13.6:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+schema-dts@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/schema-dts/-/schema-dts-0.3.1.tgz#934d5a08fac1255c14f8d48755f110231db643ec"
+  integrity sha512-TV1lwF/pkVb+Wj+RuvceoFog4dc6yp6ZsYItjdXqXmDghllUr9/E0X4tpHPK3TdHcMWxECctBl01hVRJrEhJXg==
 
 schema-utils@^0.4.0, schema-utils@^0.4.4, schema-utils@^0.4.5:
   version "0.4.7"

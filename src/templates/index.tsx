@@ -1,30 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../components/Layout'
 import CardList from '../components/CardList'
-import Card from '../components/Card'
+import {Card} from '../components/Card'
 import Container from '../components/Container'
 import Pagination from '../components/Pagination'
-import Seo from '../components/SEO'
+import {SEO} from '../components/SEO'
 import config from '../utils/siteConfig'
-import {IndexQuery} from '../graphql'
+import {IndexTemplateQuery} from '../types/graphql'
 
-interface Props {
-  data: IndexQuery
-  pageContext: any
+interface IndexTempateProps {
+  readonly data: IndexTemplateQuery
+  pageContext: {
+    readonly limit: number
+    readonly skip: number
+    readonly numPages: number
+    readonly currentPage: number
+  }
 }
 
-const Index: React.SFC<Props> = ({data, pageContext}): JSX.Element => {
+const IndexTemplate: React.FC<IndexTempateProps> = ({
+  data,
+  pageContext,
+}): JSX.Element => {
   const posts = data.allContentfulPost && data.allContentfulPost.edges
   const featuredPost = posts && posts[0].node
   const {currentPage} = pageContext
   const isFirstPage = currentPage === 1
-
   return (
     <Layout>
-      <Seo />
+      <SEO />
       {!isFirstPage && (
         <Helmet>
           <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
@@ -52,7 +58,7 @@ const Index: React.SFC<Props> = ({data, pageContext}): JSX.Element => {
 }
 
 export const query = graphql`
-  query Index($skip: Int!, $limit: Int!) {
+  query IndexTemplate($skip: Int!, $limit: Int!) {
     allContentfulPost(
       sort: {fields: [publishDate], order: DESC}
       limit: $limit
@@ -88,4 +94,4 @@ export const query = graphql`
 `
 
 // eslint-disable-next-line import/no-default-export
-export default Index
+export default IndexTemplate

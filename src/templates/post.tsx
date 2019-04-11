@@ -1,6 +1,7 @@
 import React from 'react'
 import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
+
 import config from '../utils/siteConfig'
 import Layout from '../components/Layout'
 import Hero from '../components/Hero'
@@ -9,10 +10,29 @@ import PageBody from '../components/PageBody'
 import TagList from '../components/TagList'
 import PostLinks from '../components/PostLinks'
 import PostDate from '../components/PostDate'
-import Seo from '../components/SEO'
+import {SEO} from '../components/SEO'
+import {PostTemplateQuery} from '../types/graphql'
 
-const PostTemplate = ({data, pageContext}) => {
-  const {title, slug, heroImage, body, publishDate, tags} = data.contentfulPost
+interface PostTemplateProps {
+  readonly data: PostTemplateQuery
+  pageContext: {
+    readonly slug: string
+    readonly prev: number
+    readonly next: number
+  }
+}
+
+const PostTemplate: React.FC<PostTemplateProps> = ({
+  data,
+  pageContext,
+}): JSX.Element => {
+  const title = data.contentfulPost && data.contentfulPost.title
+  const slug = data.contentfulPost && data.contentfulPost.slug
+  const body = data.contentfulPost && data.contentfulPost.body
+  const heroImage = data.contentfulPost && data.contentfulPost.heroImage
+  const publishDate = data.contentfulPost && data.contentfulPost.publishDate
+  const tags = data.contentfulPost && data.contentfulPost.tags
+
   const postNode = data.contentfulPost
 
   const previous = pageContext.prev
@@ -23,7 +43,7 @@ const PostTemplate = ({data, pageContext}) => {
       <Helmet>
         <title>{`${title} - ${config.siteTitle}`}</title>
       </Helmet>
-      <Seo pagePath={slug} postNode={postNode} postSEO />
+      <SEO pagePath={slug} postNode={postNode} postSEO />
 
       <Hero title={title} image={heroImage} height="50vh" />
 
@@ -38,7 +58,7 @@ const PostTemplate = ({data, pageContext}) => {
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query PostTemplate($slug: String!) {
     contentfulPost(slug: {eq: $slug}) {
       title
       slug
@@ -80,4 +100,5 @@ export const query = graphql`
   }
 `
 
+// eslint-disable-next-line import/no-default-export
 export default PostTemplate

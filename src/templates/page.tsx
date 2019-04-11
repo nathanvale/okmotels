@@ -6,10 +6,24 @@ import Layout from '../components/Layout'
 import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
 import PageBody from '../components/PageBody'
-import Seo from '../components/SEO'
+import {SEO} from '../components/SEO'
+import {PageTemplateQuery} from '../types/graphql'
 
-const PageTemplate = ({data}) => {
-  const {title, slug, body} = data.contentfulPage
+interface PageTempateProps {
+  readonly data: PageTemplateQuery
+  pageContext: {
+    readonly limit: number
+    readonly skip: number
+    readonly numPages: number
+    readonly currentPage: number
+  }
+}
+
+const PageTemplate: React.FC<PageTempateProps> = ({data}): JSX.Element => {
+  const title = data.contentfulPage && data.contentfulPage.title
+  const slug = data.contentfulPage && data.contentfulPage.slug
+  const body = data.contentfulPage && data.contentfulPage.body
+
   const postNode = data.contentfulPage
 
   return (
@@ -17,8 +31,7 @@ const PageTemplate = ({data}) => {
       <Helmet>
         <title>{`${title} - ${config.siteTitle}`}</title>
       </Helmet>
-      <Seo pagePath={slug} postNode={postNode} pageSEO />
-
+      <SEO pagePath={slug} postNode={postNode} pageSEO />
       <Container>
         <PageTitle>{title}</PageTitle>
         <PageBody body={body} />
@@ -28,7 +41,7 @@ const PageTemplate = ({data}) => {
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query PageTemplate($slug: String!) {
     contentfulPage(slug: {eq: $slug}) {
       title
       slug
@@ -47,4 +60,5 @@ export const query = graphql`
   }
 `
 
+// eslint-disable-next-line import/no-default-export
 export default PageTemplate

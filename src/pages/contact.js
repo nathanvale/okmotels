@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
 import ContactForm from '../components/ContactForm'
-import Seo from '../components/SEO'
+import {SEO} from '../components/SEO'
 
 const Contact = () => {
   const postNode = {
@@ -17,7 +17,7 @@ const Contact = () => {
       <Helmet>
         <title>{`Contact - ${config.siteTitle}`}</title>
       </Helmet>
-      <Seo postNode={postNode} pagePath="contact" customTitle />
+      <SEO postNode={postNode} pagePath="contact" customTitle />
 
       <Container>
         <PageTitle>Contact</PageTitle>
