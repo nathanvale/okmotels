@@ -12,8 +12,8 @@ const List = styled.ul`
   }
 `
 
-const CardList = props => {
+const CardList: React.FC = (props): JSX.Element => {
   return <List>{props.children}</List>
 }
 
-export default CardList
+export {CardList}

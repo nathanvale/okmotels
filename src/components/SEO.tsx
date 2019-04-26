@@ -15,7 +15,6 @@ import {
   ContentfulPage,
   MarkdownRemark,
   Internal,
-  ContentfulPost,
   PostTemplateQuery,
   PageTemplateQuery,
 } from '../types/graphql'
@@ -34,13 +33,13 @@ type z = Maybe<
   }
 >
 interface SEOProps {
-  postNode:
-    | PostTemplateQuery['contentfulPost']
+  postNode?:
     | PageTemplateQuery['contentfulPage']
+    | PostTemplateQuery['contentfulPost']
   pageSEO?: boolean
   postSEO?: boolean
   pagePath?: string
-  customTitle?: string
+  customTitle?: boolean
 }
 
 class SEO extends Component<SEOProps> {
@@ -84,15 +83,18 @@ class SEO extends Component<SEOProps> {
     }
     // Use Hero Image for OpenGraph
     if (postSEO) {
-      image = `https:${idx(postNode, _ => _.heroImage.ogimg.src)}`
+      image = `https:${idx(
+        postNode as PostTemplateQuery['contentfulPost'],
+        _ => _.heroImage.ogimg.src,
+      )}`
       imgWidth =
-        idx<Maybe<ContentfulPost>, number>(
-          postNode,
+        idx(
+          postNode as PostTemplateQuery['contentfulPost'],
           _ => _.heroImage.ogimg.width,
         ) || 0
       imgHeight =
-        idx<SEOProps['postNode'], number>(
-          postNode,
+        idx(
+          postNode as PostTemplateQuery['contentfulPost'],
           _ => _.heroImage.ogimg.height,
         ) || 0
     }
@@ -162,7 +164,8 @@ class SEO extends Component<SEOProps> {
           name: config.publisher,
           url: config.siteUrl,
         },
-        datePublished: postNode && postNode.publishDateISO,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        datePublished: postNode && (postNode as any).publishDateISO,
         mainEntityOfPage: pageUrl,
       }
       schemaOrgJSONLD.push(breadcrumbList, blogPosting)

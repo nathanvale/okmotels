@@ -9,8 +9,8 @@ const Wrapper = styled.section`
   flex-grow: 1;
 `
 
-const Container = props => {
+const Container: React.FC = (props): JSX.Element => {
   return <Wrapper>{props.children}</Wrapper>
 }
 
-export default Container
+export {Container}

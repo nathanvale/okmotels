@@ -1,7 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'gatsby'
+import {ContentfulTag} from '../types/graphql'
+import { Maybe } from '../types/custom-types';
 
+interface TagListProps {
+  tags?: readonly Maybe<Pick<ContentfulTag, 'title' | 'slug' | 'id'>>[]
+} 
+ 
 const List = styled.ul`
   width: 100%;
   margin: 0 auto 1em auto;
@@ -27,16 +33,16 @@ const Tag = styled.li`
   }
 `
 
-const TagList = props => {
+const TagList: React.FC<TagListProps> = (props): JSX.Element => {
   return (
     <List>
-      {props.tags.map(tag => (
-        <Tag key={tag.id}>
-          <Link to={`/tag/${tag.slug}/`}>{tag.title}</Link>
+      {props.tags && props.tags.map(tag => (
+        <Tag key={tag && tag.id}>
+          <Link to={`/tag/${tag && tag.slug}/`}>{tag && tag.title}</Link>
         </Tag>
       ))}
     </List>
   )
 }
 
-export default TagList
+export {TagList}

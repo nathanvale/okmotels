@@ -99,7 +99,7 @@ exports.createPages = ({graphql, actions}) => {
           createPage({
             path:
               i === 0 ? `/tag/${node.slug}/` : `/tag/${node.slug}/${i + 1}/`,
-            component: path.resolve(`./src/templates/tag.js`),
+            component: path.resolve(`./src/templates/tag.tsx`),
             context: {
               slug: node.slug,
               limit: postsPerPage,

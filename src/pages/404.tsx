@@ -2,9 +2,9 @@ import React from 'react'
 import {Link} from 'gatsby'
 import styled from 'styled-components'
 import Helmet from 'react-helmet'
-import PageTitle from '../components/PageTitle'
-import Container from '../components/Container'
-import Layout from '../components/Layout'
+import {PageTitle} from '../components/PageTitle'
+import {Container} from '../components/Container'
+import {Layout} from '../components/Layout'
 
 const Text = styled.p`
   text-align: center;
@@ -14,7 +14,7 @@ const Text = styled.p`
   }
 `
 
-const NotFoundPage = () => (
+const NotFoundPage: React.FC = (): JSX.Element => (
   <Layout>
     <Helmet>
       <title>404 - Page Not Found</title>
@@ -31,4 +31,5 @@ const NotFoundPage = () => (
   </Layout>
 )
 
+// eslint-disable-next-line import/no-default-export
 export default NotFoundPage

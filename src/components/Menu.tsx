@@ -44,7 +44,7 @@ const activeLinkStyle = {
   color: 'white',
 }
 
-const Menu = () => {
+const Menu: React.FC = (): JSX.Element => {
   return (
     <Header>
       <Nav>
@@ -70,4 +70,4 @@ const Menu = () => {
   )
 }
 
-export default Menu
+export {Menu}

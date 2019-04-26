@@ -1,22 +1,23 @@
 import React from 'react'
 import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
-import Layout from '../components/Layout'
-import CardList from '../components/CardList'
+import {Layout} from '../components/Layout'
+import {CardList} from '../components/CardList'
 import {Card} from '../components/Card'
-import Container from '../components/Container'
-import Pagination from '../components/Pagination'
+import {Container} from '../components/Container'
+import {Pagination} from '../components/Pagination'
 import {SEO} from '../components/SEO'
 import config from '../utils/siteConfig'
 import {IndexTemplateQuery} from '../types/graphql'
 
 interface IndexTempateProps {
   readonly data: IndexTemplateQuery
-  pageContext: {
+  readonly pageContext: {
     readonly limit: number
     readonly skip: number
     readonly numPages: number
     readonly currentPage: number
+    readonly slug: string
   }
 }
 

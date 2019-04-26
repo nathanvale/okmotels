@@ -1,7 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import idx from 'idx'
+import {MarkdownRemark} from '../types/graphql'
 
 require('prismjs/themes/prism.css')
+
+interface PageBodyProps {
+  body?: {
+    readonly childMarkdownRemark?: Pick<MarkdownRemark, 'html' | 'excerpt'>
+  }
+}
 
 const Body = styled.div`
   margin: 0 auto;
@@ -98,12 +106,12 @@ const Body = styled.div`
   }
 `
 
-const PageBody = props => {
-  return (
-    <Body
-      dangerouslySetInnerHTML={{__html: props.body.childMarkdownRemark.html}}
-    />
+const PageBody: React.FC<PageBodyProps> = (props): JSX.Element => {
+  const html = idx<PageBodyProps, string>(
+    props,
+    _ => _.body.childMarkdownRemark.html,
   )
+  return <Body dangerouslySetInnerHTML={{__html: html || ''}} />
 }
 
-export default PageBody
+export {PageBody}

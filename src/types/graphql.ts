@@ -3274,7 +3274,6 @@ export enum SitePageFieldsEnum {
   ContextPrevPublishDate = 'context___prev___publishDate',
   ContextNextSlug = 'context___next___slug',
   ContextNextPublishDate = 'context___next___publishDate',
-  PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
   PluginCreatorParentParentChildren = 'pluginCreator___parent___parent___children',
@@ -3328,7 +3327,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsSiteUrl = 'pluginCreator___pluginOptions___siteUrl',
   PluginCreatorPluginOptionsMaxWidth = 'pluginCreator___pluginOptions___maxWidth',
-  PluginCreatorPluginOptionsBackgroundColor = 'pluginCreator___pluginOptions___backgroundColor',
   PluginCreatorPluginOptionsLinkImagesToOriginal = 'pluginCreator___pluginOptions___linkImagesToOriginal',
   PluginCreatorPluginOptionsHost = 'pluginCreator___pluginOptions___host',
   PluginCreatorPluginOptionsSpaceId = 'pluginCreator___pluginOptions___spaceId',
@@ -3552,7 +3550,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsSiteUrl = 'pluginOptions___siteUrl',
   PluginOptionsMaxWidth = 'pluginOptions___maxWidth',
-  PluginOptionsBackgroundColor = 'pluginOptions___backgroundColor',
   PluginOptionsLinkImagesToOriginal = 'pluginOptions___linkImagesToOriginal',
   PluginOptionsHost = 'pluginOptions___host',
   PluginOptionsSpaceId = 'pluginOptions___spaceId',
@@ -3972,6 +3969,47 @@ export type PostTemplateQuery = {
           Pick<MarkdownRemark, 'html' | 'excerpt'>
         >
       }>
+    }
+  >
+}
+
+export type TagTemplateQueryVariables = {
+  slug: Scalars['String']
+}
+
+export type TagTemplateQuery = {
+  readonly contentfulTag: Maybe<
+    Pick<ContentfulTag, 'title' | 'id' | 'slug'> & {
+      readonly post: Maybe<
+        ReadonlyArray<
+          Maybe<
+            Pick<ContentfulPost, 'id' | 'title' | 'slug' | 'publishDate'> & {
+              readonly publishDateISO: ContentfulPost['publishDate']
+            } & {
+              readonly heroImage: Maybe<
+                Pick<ContentfulAsset, 'title'> & {
+                  readonly fluid: Maybe<
+                    Pick<
+                      ContentfulFluid,
+                      | 'aspectRatio'
+                      | 'src'
+                      | 'srcSet'
+                      | 'srcWebp'
+                      | 'srcSetWebp'
+                      | 'sizes'
+                    >
+                  >
+                }
+              >
+              readonly body: Maybe<{
+                readonly childMarkdownRemark: Maybe<
+                  Pick<MarkdownRemark, 'html' | 'excerpt'>
+                >
+              }>
+            }
+          >
+        >
+      >
     }
   >
 }
