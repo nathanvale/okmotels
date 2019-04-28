@@ -8,3 +8,5 @@ export interface Fluid {
   srcWebp?: string
   srcSetWebp?: string
 }
+
+export type Maybe<T> = T | undefined

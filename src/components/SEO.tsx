@@ -11,13 +11,34 @@ import {
   WebPage,
 } from 'schema-dts'
 import config from '../utils/siteConfig'
-import {PageTemplateQuery, PostTemplateQuery} from '../types/graphql'
+import {
+  ContentfulPage,
+  MarkdownRemark,
+  Internal,
+  ContentfulPost,
+  PostTemplateQuery,
+  PageTemplateQuery,
+} from '../types/graphql'
+import {Maybe} from '../types/custom-types'
 
+type z = Maybe<
+  Pick<ContentfulPage, 'title' | 'slug'> & {
+    readonly metaDescription: Maybe<{
+      readonly internal: Pick<Internal, 'content'>
+    }>
+    readonly body: Maybe<{
+      readonly childMarkdownRemark: Maybe<
+        Pick<MarkdownRemark, 'html' | 'excerpt'>
+      >
+    }>
+  }
+>
 interface SEOProps {
-  postNode?: PageTemplateQuery['contentfulPage'] &
-    PostTemplateQuery['contentfulPost']
-  pageSEO?: string
-  postSEO?: string
+  postNode:
+    | PostTemplateQuery['contentfulPost']
+    | PageTemplateQuery['contentfulPage']
+  pageSEO?: boolean
+  postSEO?: boolean
   pagePath?: string
   customTitle?: string
 }
@@ -50,16 +71,30 @@ class SEO extends Component<SEOProps> {
       title = (postNode && postNode.title) || ''
       description =
         postNode && postNode.metaDescription === null
-          ? idx(postNode, _ => _.body.childMarkdownRemark.excerpt) || ''
-          : idx(postNode, _ => _.metaDescription.internal.content) || ''
+          ? idx<SEOProps['postNode'], string>(
+              postNode,
+              _ => _.body.childMarkdownRemark.excerpt,
+            ) || ''
+          : idx<SEOProps['postNode'], string>(
+              postNode,
+              _ => _.metaDescription.internal.content,
+            ) || ''
 
       pageUrl = `${config.siteUrl}/${pagePath}/`
     }
     // Use Hero Image for OpenGraph
     if (postSEO) {
       image = `https:${idx(postNode, _ => _.heroImage.ogimg.src)}`
-      imgWidth = idx(postNode, _ => _.heroImage.ogimg.width) || 0
-      imgHeight = idx(postNode, _ => _.heroImage.ogimg.height) || 0
+      imgWidth =
+        idx<Maybe<ContentfulPost>, number>(
+          postNode,
+          _ => _.heroImage.ogimg.width,
+        ) || 0
+      imgHeight =
+        idx<SEOProps['postNode'], number>(
+          postNode,
+          _ => _.heroImage.ogimg.height,
+        ) || 0
     }
 
     // Default Website Schema
