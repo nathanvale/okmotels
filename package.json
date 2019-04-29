@@ -34,15 +34,7 @@
     ],
     "presets": [
       [
-        "babel-preset-gatsby",
-        {
-          "targets": {
-            "browsers": [
-              ">0.25%",
-              "not dead"
-            ]
-          }
-        }
+        "./node_modules/easy-scripts/dist/config/babelrc.js"
       ]
     ]
   },
@@ -124,7 +116,8 @@
     "@types/react-dom": "^16.8.2",
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.14",
-    "easy-scripts": "^2.4.0",
+    "babel-preset-gatsby": "^0.1.11",
+    "easy-scripts": "^2.5.0",
     "graphql": "^14.2.1",
     "react-scripts": "^2.1.8",
     "react-testing-library": "^6.0.0",
