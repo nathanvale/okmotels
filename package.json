@@ -6,6 +6,7 @@
     "build": "yarn clean; gatsby build",
     "clean": "rm -rf public .cache",
     "format": "easy-scripts format",
+    "generate": "graphql-codegen",
     "lint": "easy-scripts lint; stylelint 'src/**/*.js'",
     "setup": "node ./bin/setup.js",
     "start": "gatsby develop",
@@ -19,19 +20,39 @@
       "post-rewrite": "easy-scripts pre-commit"
     }
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "babel": {
+    "plugins": [
+      "babel-plugin-idx",
+      [
+        "babel-plugin-styled-components",
+        {
+          "displayName": true,
+          "ssr": false,
+          "pure": true
+        }
+      ]
+    ],
+    "presets": [
+      [
+        "./node_modules/easy-scripts/dist/config/babelrc.js"
+      ]
+    ]
+  },
   "eslintConfig": {
     "extends": "./node_modules/easy-scripts/dist/config/eslintrc.js",
     "rules": {
       "react/prop-types": "off",
-      "jsx-a11y/label-has-for": "off"
+      "jsx-a11y/label-has-for": "off",
+      "react/jsx-pascal-case": "off"
     }
   },
+  "eslintIgnore": [
+    "public",
+    "static",
+    ".cache",
+    "coverage",
+    "src/types/graphql.ts"
+  ],
   "jest": {
     "coverageThreshold": {
       "global": {
@@ -47,7 +68,8 @@
     ]
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.0",
+    "@babel/runtime": "^7.4.3",
+    "babel-plugin-idx": "^2.4.0",
     "babel-plugin-styled-components": "^1.10.0",
     "chalk": "^2.4.1",
     "contentful-import": "^7.4.3",
@@ -64,12 +86,14 @@
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-sitemap": "^2.0.3",
     "gatsby-plugin-styled-components": "^3.0.4",
+    "gatsby-plugin-typescript": "^2.0.12",
     "gatsby-remark-autolink-headers": "^2.0.12",
     "gatsby-remark-images-contentful": "^2.0.5",
     "gatsby-remark-prismjs": "^3.1.4",
     "gatsby-source-contentful": "^2.0.20",
     "gatsby-source-filesystem": "^2.0.12",
     "gatsby-transformer-remark": "^2.1.17",
+    "idx": "^2.5.5",
     "inquirer": "^6.2.1",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
@@ -79,14 +103,25 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "typed-graphqlify": "^2.2.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.0.7",
+    "@graphql-codegen/typescript": "^1.0.7",
+    "@graphql-codegen/typescript-operations": "^1.0.7",
+    "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.123",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
-    "easy-scripts": "^2.3.12",
+    "@types/react-helmet": "^5.0.8",
+    "@types/styled-components": "^4.1.14",
+    "babel-preset-gatsby": "^0.1.11",
+    "easy-scripts": "^2.5.0",
+    "graphql": "^14.2.1",
     "react-scripts": "^2.1.8",
     "react-testing-library": "^6.0.0",
+    "schema-dts": "^0.3.1",
     "stylelint": "9.10.1",
     "stylelint-config-prettier": "^5.0.0",
     "stylelint-config-standard": "^18.2.0",

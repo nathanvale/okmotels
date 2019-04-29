@@ -1,12 +1,28 @@
 import React from 'react'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import idx from 'idx'
+import {ContentfulAsset, ContentfulFluid} from '../types/graphql'
+import {Fluid} from '../types/custom-types'
+
+interface HeroProps {
+  readonly title?: string
+  readonly height?: string
+  readonly position?: boolean
+  readonly fit?: boolean
+  readonly image?: Pick<ContentfulAsset, 'title'> & {
+    readonly fluid?: Pick<
+      ContentfulFluid,
+      'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'
+    >
+  }
+}
 
 const Wrapper = styled.section`
   position: relative;
   min-height: 300px;
 `
-const BgImg = styled(Img)`
+const BgImg = styled(Img)<Pick<HeroProps, 'position' | 'fit' | 'height'>>`
   position: absolute;
   top: 0;
   left: 0;
@@ -18,8 +34,8 @@ const BgImg = styled(Img)`
     height: ${props => props.height || 'auto'};
   }
   & > img {
-    object-fit: ${props => props.fit || 'cover'} !important;
-    object-position: ${props => props.position || '50% 50%'} !important;
+    object-fit: ${props => (props.fit ? '' : 'cover')} !important;
+    object-position: ${props => (props.position ? '' : '50% 50%')} !important;
   }
   &::before {
     content: '';
@@ -50,15 +66,18 @@ const Title = styled.h1`
   color: white;
 `
 
-const Hero = props => (
+const Hero: React.FC<HeroProps> = (props): JSX.Element => (
   <Wrapper>
     <BgImg
       height={props.height}
-      fluid={props.image.fluid}
+      fluid={
+        idx<Pick<HeroProps, 'image'>, Fluid>(props, _ => _.image.fluid) ||
+        undefined
+      }
       backgroundColor="#eeeeee"
     />
     <Title>{props.title}</Title>
   </Wrapper>
 )
 
-export default Hero
+export {Hero}

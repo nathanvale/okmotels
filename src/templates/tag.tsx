@@ -2,24 +2,37 @@ import React from 'react'
 import {graphql} from 'gatsby'
 import orderBy from 'lodash/orderBy'
 import Helmet from 'react-helmet'
-import moment from 'moment'
+import * as moment from 'moment'
 import config from '../utils/siteConfig'
-import Layout from '../components/Layout'
-import Card from '../components/Card'
-import CardList from '../components/CardList'
-import PageTitle from '../components/PageTitle'
-import Pagination from '../components/Pagination'
-import Container from '../components/Container'
+import {Layout} from '../components/Layout'
+import {Card} from '../components/Card'
+import {CardList} from '../components/CardList'
+import {PageTitle} from '../components/PageTitle'
+import {Pagination} from '../components/Pagination'
+import {Container} from '../components/Container'
+import {TagTemplateQuery} from '../types/graphql'
 
-const TagTemplate = ({data, pageContext}) => {
+interface TagProps {
+  data: TagTemplateQuery
+  pageContext: {
+    readonly slug: string
+    readonly limit: number
+    readonly skip: number
+    readonly numPages: number
+    readonly currentPage: number
+  }
+}
+
+const TagTemplate: React.FC<TagProps> = ({data, pageContext}): JSX.Element => {
   const posts = orderBy(
-    data.contentfulTag.post,
-    // eslint-disable-next-line
-    [object => new moment(object.publishDateISO)],
+    data.contentfulTag && data.contentfulTag.post,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [(object: any) => moment.default(object.publishDateISO)],
     ['desc'],
   )
 
-  const {title, slug} = data.contentfulTag
+  const title = data.contentfulTag && data.contentfulTag.title
+  const slug = data.contentfulTag && data.contentfulTag.slug
   const numberOfPosts = posts.length
   const skip = pageContext.skip
   const limit = pageContext.limit
@@ -61,7 +74,7 @@ const TagTemplate = ({data, pageContext}) => {
 
         <CardList>
           {posts.slice(skip, limit * currentPage).map(post => (
-            <Card {...post} key={post.id} />
+            <Card {...post} key={post && post.id} />
           ))}
         </CardList>
       </Container>
@@ -71,7 +84,7 @@ const TagTemplate = ({data, pageContext}) => {
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query TagTemplate($slug: String!) {
     contentfulTag(slug: {eq: $slug}) {
       title
       id
@@ -85,7 +98,12 @@ export const query = graphql`
         heroImage {
           title
           fluid(maxWidth: 1800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
+            aspectRatio
+            src
+            srcSet
+            srcWebp
+            srcSetWebp
+            sizes
           }
         }
         body {
@@ -99,4 +117,5 @@ export const query = graphql`
   }
 `
 
+// eslint-disable-next-line import/no-default-export
 export default TagTemplate

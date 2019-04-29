@@ -41,7 +41,7 @@ const Item = styled.li`
   }
 `
 
-const Footer = () => (
+const Footer: React.FC = (): JSX.Element => (
   <Wrapper>
     <List>
       <Item>
@@ -78,4 +78,4 @@ const Footer = () => (
   </Wrapper>
 )
 
-export default Footer
+export {Footer}

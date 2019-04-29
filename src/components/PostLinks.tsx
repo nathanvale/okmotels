@@ -2,6 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'gatsby'
 
+interface PostLinksProps {
+  previous: {slug: string}
+  next: {slug: string}
+}
+
 const Wrapper = styled.div`
   margin: -2em 0 0 0;
   padding: 0 1.5em 2em;
@@ -36,7 +41,7 @@ const NextLink = styled(Link)`
   order: 2;
 `
 
-const PostLinks = props => {
+const PostLinks: React.FC<PostLinksProps> = (props): JSX.Element => {
   return (
     <Wrapper>
       <Box>
@@ -53,4 +58,4 @@ const PostLinks = props => {
   )
 }
 
-export default PostLinks
+export {PostLinks}

@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
+interface PostDateProps {
+  date: string
+}
+
 const Wrapper = styled.div`
   margin: 0 auto 2em;
   max-width: ${props => props.theme.sizes.maxWidthCentered};
@@ -13,7 +17,7 @@ const Date = styled.p`
   }
 `
 
-const PostDate = props => {
+const PostDate: React.FC<PostDateProps> = (props): JSX.Element => {
   return (
     <Wrapper>
       <Date>
@@ -23,4 +27,4 @@ const PostDate = props => {
   )
 }
 
-export default PostDate
+export {PostDate}

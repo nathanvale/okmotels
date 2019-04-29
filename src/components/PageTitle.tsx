@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Title = styled.h1`
+interface PageTitleProps {
+  small?: boolean
+}
+
+const Title = styled.h1<PageTitleProps>`
   font-size: ${props => (props.small ? '2em' : '3em')};
   text-transform: capitalize;
   font-weight: 600;
@@ -21,8 +25,8 @@ const Title = styled.h1`
   }
 `
 
-const PageTitle = props => {
+const PageTitle: React.FC<PageTitleProps> = (props): JSX.Element => {
   return <Title small={props.small}>{props.children}</Title>
 }
 
-export default PageTitle
+export {PageTitle}
