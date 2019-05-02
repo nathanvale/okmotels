@@ -7,7 +7,7 @@ require('prismjs/themes/prism.css')
 
 interface PageBodyProps {
   body?: {
-    readonly childMarkdownRemark?: Pick<MarkdownRemark, 'html' | 'excerpt'>
+    childMarkdownRemark?: Pick<MarkdownRemark, 'html' | 'excerpt'>
   }
 }
 

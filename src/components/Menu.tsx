@@ -1,6 +1,7 @@
 import React from 'react'
-import {Link} from 'gatsby'
+import {Link, navigate} from 'gatsby'
 import styled from 'styled-components'
+import {getUser, isLoggedIn, logout} from '../services/auth'
 
 const Header = styled.header`
   background: ${props => props.theme.colors.base};
@@ -12,6 +13,10 @@ const Nav = styled.nav`
   max-width: ${props => props.theme.sizes.maxWidth};
   margin: 0 auto;
   padding: 0 1.5em;
+  span {
+    color: white;
+    white-space: nowrap;
+  }
 
   ul {
     display: flex;
@@ -45,6 +50,12 @@ const activeLinkStyle = {
 }
 
 const Menu: React.FC = (): JSX.Element => {
+  const content = {message: '', login: true}
+  if (isLoggedIn()) {
+    content.message = `Hello, ${getUser().name}`
+  } else {
+    content.message = 'You are not logged in'
+  }
   return (
     <Header>
       <Nav>
@@ -54,6 +65,7 @@ const Menu: React.FC = (): JSX.Element => {
               Home
             </Link>
           </li>
+          <span>{content.message}</span>
           <li>
             <Link to="/about/" activeStyle={activeLinkStyle}>
               About
@@ -64,6 +76,25 @@ const Menu: React.FC = (): JSX.Element => {
               Contact
             </Link>
           </li>
+          {isLoggedIn() ? (
+            <li>
+              <a
+                href="/"
+                onClick={event => {
+                  event.preventDefault()
+                  logout(() => navigate(`/app/login`))
+                }}
+              >
+                Logout
+              </a>
+            </li>
+          ) : (
+            <li>
+              <Link to="/app/login" activeStyle={activeLinkStyle}>
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </Nav>
     </Header>

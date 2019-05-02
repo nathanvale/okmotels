@@ -6,7 +6,7 @@ import {Maybe} from '../types/custom-types'
 
 // prettier-ignore
 interface TagListProps {
-  tags?: readonly Maybe<Pick<ContentfulTag, 'title' | 'slug' | 'id'>>[]
+  tags?:  Maybe<Pick<ContentfulTag, 'title' | 'slug' | 'id'>>[]
 }
 
 const List = styled.ul`

@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import {Link} from 'gatsby'
 
 interface PaginationProps {
-  readonly context: {
-    readonly limit: number
-    readonly skip: number
-    readonly numPages: number
-    readonly currentPage: number
-    readonly slug: string
+  context: {
+    limit: number
+    skip: number
+    numPages: number
+    currentPage: number
+    slug: string
   }
 }
 

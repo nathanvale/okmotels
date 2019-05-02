@@ -10,12 +10,12 @@ import {SEO} from '../components/SEO'
 import {PageTemplateQuery} from '../types/graphql'
 
 interface PageTempateProps {
-  readonly data: PageTemplateQuery
+  data: PageTemplateQuery
   pageContext: {
-    readonly limit: number
-    readonly skip: number
-    readonly numPages: number
-    readonly currentPage: number
+    limit: number
+    skip: number
+    numPages: number
+    currentPage: number
   }
 }
 
