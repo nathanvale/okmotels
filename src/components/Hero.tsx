@@ -6,12 +6,12 @@ import {ContentfulAsset, ContentfulFluid} from '../types/graphql'
 import {Fluid} from '../types/custom-types'
 
 interface HeroProps {
-  readonly title?: string
-  readonly height?: string
-  readonly position?: boolean
-  readonly fit?: boolean
-  readonly image?: Pick<ContentfulAsset, 'title'> & {
-    readonly fluid?: Pick<
+  title?: string
+  height?: string
+  position?: boolean
+  fit?: boolean
+  image?: Pick<ContentfulAsset, 'title'> & {
+    fluid?: Pick<
       ContentfulFluid,
       'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'
     >

@@ -16,13 +16,13 @@ interface CardProps {
   slug?: string
   publishDate?: string
   heroImage?: Pick<ContentfulAsset, 'title'> & {
-    readonly fluid?: Pick<
+    fluid?: Pick<
       ContentfulFluid,
       'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'
     >
   }
   body?: {
-    readonly childMarkdownRemark?: Pick<MarkdownRemark, 'html' | 'excerpt'>
+    childMarkdownRemark?: Pick<MarkdownRemark, 'html' | 'excerpt'>
   }
   featured?: boolean
 }

@@ -11,13 +11,13 @@ import config from '../utils/siteConfig'
 import {IndexTemplateQuery} from '../types/graphql'
 
 interface IndexTempateProps {
-  readonly data: IndexTemplateQuery
-  readonly pageContext: {
-    readonly limit: number
-    readonly skip: number
-    readonly numPages: number
-    readonly currentPage: number
-    readonly slug: string
+  data: IndexTemplateQuery
+  pageContext: {
+    limit: number
+    skip: number
+    numPages: number
+    currentPage: number
+    slug: string
   }
 }
 

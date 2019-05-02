@@ -43,7 +43,8 @@
     "rules": {
       "react/prop-types": "off",
       "jsx-a11y/label-has-for": "off",
-      "react/jsx-pascal-case": "off"
+      "react/jsx-pascal-case": "off",
+      "react/jsx-child-element-spacing":"off"
     }
   },
   "eslintIgnore": [
@@ -69,6 +70,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
+    "@reach/router": "^1.2.1",
     "babel-plugin-idx": "^2.4.0",
     "babel-plugin-styled-components": "^1.10.0",
     "chalk": "^2.4.1",
@@ -107,9 +109,9 @@
     "typed-graphqlify": "^2.2.2"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.0.7",
-    "@graphql-codegen/typescript": "^1.0.7",
-    "@graphql-codegen/typescript-operations": "^1.0.7",
+    "@graphql-codegen/cli": "^1.1.1",
+    "@graphql-codegen/typescript": "^1.1.1",
+    "@graphql-codegen/typescript-operations": "^1.1.1",
     "@types/jest": "^24.0.11",
     "@types/lodash": "^4.14.123",
     "@types/react": "^16.8.8",

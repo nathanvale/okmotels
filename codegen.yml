@@ -6,7 +6,7 @@ generates:
       - typescript
       - typescript-operations
     config:
-      enumsAsTypes: false
-      immutableTypes: true
+      enumsAsTypes: true
+      immutableTypes: false
       skipTypename: true
       maybeValue: T | undefined

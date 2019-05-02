@@ -22,13 +22,11 @@ import {Maybe} from '../types/custom-types'
 
 type z = Maybe<
   Pick<ContentfulPage, 'title' | 'slug'> & {
-    readonly metaDescription: Maybe<{
-      readonly internal: Pick<Internal, 'content'>
+    metaDescription: Maybe<{
+      internal: Pick<Internal, 'content'>
     }>
-    readonly body: Maybe<{
-      readonly childMarkdownRemark: Maybe<
-        Pick<MarkdownRemark, 'html' | 'excerpt'>
-      >
+    body: Maybe<{
+      childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html' | 'excerpt'>>
     }>
   }
 >

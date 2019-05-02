@@ -15,11 +15,11 @@ import {TagTemplateQuery} from '../types/graphql'
 interface TagProps {
   data: TagTemplateQuery
   pageContext: {
-    readonly slug: string
-    readonly limit: number
-    readonly skip: number
-    readonly numPages: number
-    readonly currentPage: number
+    slug: string
+    limit: number
+    skip: number
+    numPages: number
+    currentPage: number
   }
 }
 

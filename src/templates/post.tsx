@@ -14,11 +14,11 @@ import {SEO} from '../components/SEO'
 import {PostTemplateQuery} from '../types/graphql'
 
 interface PostTemplateProps {
-  readonly data: PostTemplateQuery
+  data: PostTemplateQuery
   pageContext: {
-    readonly slug: string
-    readonly prev: {slug: string}
-    readonly next: {slug: string}
+    slug: string
+    prev: {slug: string}
+    next: {slug: string}
   }
 }
 
