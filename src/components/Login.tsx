@@ -34,7 +34,7 @@ class Login extends React.Component<RouteComponentProps> {
           <title>{`Login`}</title>
         </Helmet>
 
-        <PageTitle>Contact</PageTitle>
+        <PageTitle>Login</PageTitle>
         <Form
           method="post"
           onSubmit={event => {
