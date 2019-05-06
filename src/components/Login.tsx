@@ -34,7 +34,7 @@ class Login extends React.Component<RouteComponentProps> {
           <title>{`Login`}</title>
         </Helmet>
 
-        <PageTitle>Contact</PageTitle>
+        <PageTitle>Login</PageTitle>
         <Form
           method="post"
           onSubmit={event => {
@@ -42,13 +42,18 @@ class Login extends React.Component<RouteComponentProps> {
             navigate(`/app/profile`)
           }}
         >
+          <label hidden htmlFor="username">
+            Username
+          </label>
           <Input
             type="text"
             name="username"
             placeholder="Username"
             onChange={this.handleUpdate}
           />
-
+          <label hidden htmlFor="password">
+            Password
+          </label>
           <Input
             type="password"
             name="password"
