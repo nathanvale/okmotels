@@ -65,7 +65,7 @@ const TagTemplate: React.FC<TagProps> = ({data, pageContext}): JSX.Element => {
         </Helmet>
       )}
 
-      <Container>
+      <Container data-testid="tag">
         <PageTitle small>
           {numberOfPosts} Posts Tagged: &ldquo;
           {title}

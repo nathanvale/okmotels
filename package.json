@@ -44,7 +44,7 @@
       "react/prop-types": "off",
       "jsx-a11y/label-has-for": "off",
       "react/jsx-pascal-case": "off",
-      "react/jsx-child-element-spacing":"off"
+      "react/jsx-child-element-spacing": "off"
     }
   },
   "eslintIgnore": [
@@ -63,9 +63,30 @@
         "statements": 0
       }
     },
+    "globals": {
+      "__PATH_PREFIX__": ""
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|ico)$": "<rootDir>/src/__mocks__/fileMock.js"
+    },
     "preset": "./node_modules/easy-scripts/dist/config/jest.config.js",
+    "setupFiles": [
+      "<rootDir>/src/globals.js"
+    ],
+    "setupFilesAfterEnv": [
+      "jest-axe/extend-expect",
+      "jest-dom/extend-expect",
+      "react-testing-library/cleanup-after-each"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules",
+      ".cache"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx|js|jsx)$": "babel-jest"
+    },
     "transformIgnorePatterns": [
-      "/node_modules/(?!lodash-es)"
+      "/node_modules/(?!lodash-es|gatsby)"
     ]
   },
   "dependencies": {
@@ -112,17 +133,19 @@
     "@graphql-codegen/cli": "^1.1.1",
     "@graphql-codegen/typescript": "^1.1.1",
     "@graphql-codegen/typescript-operations": "^1.1.1",
-    "@types/jest": "^24.0.11",
+    "@types/jest": "^24.0.12",
+    "@types/jest-axe": "^2.2.3",
     "@types/lodash": "^4.14.123",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.14",
     "babel-preset-gatsby": "^0.1.11",
-    "easy-scripts": "^2.5.0",
+    "easy-scripts": "^2.5.5",
     "graphql": "^14.2.1",
-    "react-scripts": "^2.1.8",
-    "react-testing-library": "^6.0.0",
+    "jest-axe": "3.1.0",
+    "jest-dom": "^3.1.4",
+    "react-testing-library": "^7.0.0",
     "schema-dts": "^0.3.1",
     "stylelint": "9.10.1",
     "stylelint-config-prettier": "^5.0.0",

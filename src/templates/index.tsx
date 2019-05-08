@@ -37,7 +37,7 @@ const IndexTemplate: React.FC<IndexTempateProps> = ({
           <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
         </Helmet>
       )}
-      <Container>
+      <Container data-testid="index">
         {isFirstPage ? (
           <CardList>
             <Card {...featuredPost} featured />

@@ -65,7 +65,6 @@ const Menu: React.FC = (): JSX.Element => {
               Home
             </Link>
           </li>
-          <span>{content.message}</span>
           <li>
             <Link to="/about/" activeStyle={activeLinkStyle}>
               About
