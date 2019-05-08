@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login page redirects to profile page on correct authentication 1`] = `
+<section
+  class="Container__Wrapper-koxfXz bHtbAd"
+  data-testid="login"
+>
+  <h1
+    class="PageTitle__Title-euxURV bAxgis"
+  >
+    Login
+  </h1>
+  <form
+    class="FormElements__Form-gUrTuf cFQswl"
+    method="post"
+  >
+    <label
+      for="username"
+      hidden=""
+    >
+      Username
+    </label>
+    <input
+      class="FormElements__Input-kwjIXe extkka"
+      id="username"
+      name="username"
+      placeholder="Username"
+      type="text"
+    />
+    <label
+      for="password"
+      hidden=""
+    >
+      Password
+    </label>
+    <input
+      class="FormElements__Input-kwjIXe extkka"
+      id="password"
+      name="password"
+      placeholder="Password"
+      type="password"
+    />
+    <input
+      class="FormElements__Submit-csJEoT brxrRQ"
+      type="submit"
+      value="Log In"
+    />
+  </form>
+</section>
+`;
+
+exports[`login page redirects to profile page on correct authentication 2`] = `
+<section
+  class="Container__Wrapper-koxfXz bHtbAd"
+  data-testid="profile"
+>
+  <h1>
+    Your profile
+  </h1>
+  <ul>
+    <li>
+      Name: 
+      Nathan
+    </li>
+    <li>
+      E-mail: 
+      hi@nathanvale.com
+    </li>
+  </ul>
+</section>
+`;

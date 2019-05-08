@@ -47,7 +47,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
 
       <Hero title={title} image={heroImage} height="50vh" />
 
-      <Container>
+      <Container data-testid="post">
         {tags && <TagList tags={tags} />}
         <PostDate date={publishDate} />
         <PageBody body={body} />
