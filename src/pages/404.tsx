@@ -21,7 +21,7 @@ const NotFoundPage: React.FC = (): JSX.Element => (
       <meta name="description" content="Page not found" />
     </Helmet>
 
-    <Container>
+    <Container data-testid="404">
       <PageTitle>Page Not Found</PageTitle>
       <Text>
         Please return <Link to="/">home</Link> or use the menu to navigate to a

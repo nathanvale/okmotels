@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
+interface ContainerProps {
+  ['data-testid']: string
+}
+
 const Wrapper = styled.section`
   margin: 0 auto auto;
   width: 100%;
@@ -9,8 +13,11 @@ const Wrapper = styled.section`
   flex-grow: 1;
 `
 
-const Container: React.FC = (props): JSX.Element => {
-  return <Wrapper>{props.children}</Wrapper>
+const Container: React.FC<ContainerProps> = ({
+  'data-testid': dataTestId,
+  children,
+}): JSX.Element => {
+  return <Wrapper data-testid={dataTestId}>{children}</Wrapper>
 }
 
 export {Container}

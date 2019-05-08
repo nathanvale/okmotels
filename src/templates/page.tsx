@@ -32,7 +32,7 @@ const PageTemplate: React.FC<PageTempateProps> = ({data}): JSX.Element => {
         <title>{`${title} - ${config.siteTitle}`}</title>
       </Helmet>
       <SEO pagePath={slug} postNode={postNode} pageSEO />
-      <Container>
+      <Container data-testid="page">
         <PageTitle>{title}</PageTitle>
         <PageBody body={body} />
       </Container>

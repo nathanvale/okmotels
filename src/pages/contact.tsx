@@ -20,7 +20,7 @@ const Contact: React.FC = (): JSX.Element => {
         <title>{`Contact - ${config.siteTitle}`}</title>
       </Helmet>
       <SEO postNode={postNode as any} pagePath="contact" customTitle />
-      <Container>
+      <Container data-testid="Contact">
         <PageTitle>Contact</PageTitle>
         <ContactForm />
       </Container>

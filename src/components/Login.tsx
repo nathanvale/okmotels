@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import {handleLogin, isLoggedIn} from '../services/auth'
 import {Form, Submit, Input} from '../components/FormElements'
 import {PageTitle} from '../components/PageTitle'
+import {Container} from '../components/Container'
 
 class Login extends React.Component<RouteComponentProps> {
   state = {
@@ -33,35 +34,38 @@ class Login extends React.Component<RouteComponentProps> {
         <Helmet>
           <title>{`Login`}</title>
         </Helmet>
-
-        <PageTitle>Login</PageTitle>
-        <Form
-          method="post"
-          onSubmit={event => {
-            this.handleSubmit(event)
-            navigate(`/app/profile`)
-          }}
-        >
-          <label hidden htmlFor="username">
-            Username
-          </label>
-          <Input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={this.handleUpdate}
-          />
-          <label hidden htmlFor="password">
-            Password
-          </label>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.handleUpdate}
-          />
-          <Submit type="submit" value="Log In" />
-        </Form>
+        <Container data-testid="login">
+          <PageTitle>Login</PageTitle>
+          <Form
+            method="post"
+            onSubmit={event => {
+              this.handleSubmit(event)
+              navigate(`/app/profile`)
+            }}
+          >
+            <label hidden htmlFor="username">
+              Username
+            </label>
+            <Input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+              onChange={this.handleUpdate}
+            />
+            <label hidden htmlFor="password">
+              Password
+            </label>
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              onChange={this.handleUpdate}
+            />
+            <Submit type="submit" value="Log In" />
+          </Form>
+        </Container>
       </>
     )
   }
