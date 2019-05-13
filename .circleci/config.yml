@@ -25,7 +25,7 @@ workflows:
           build: 'yarn validate'
           post-steps:
             - persist_to_workspace:
-                root: ~/
+                root: .
                 paths:
                   - public
       - cypress/run:
