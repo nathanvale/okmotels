@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.7.0
 jobs:
-  deploy:
+  Deploy To Staging:
     docker:
       # specify the version you desire here
       - image: cibuilds/aws:latest
@@ -17,16 +17,30 @@ jobs:
 
 workflows:
   version: 2
-  build_and_deploy:
-    jobs: # run a custom app build step
-      - cypress/run:
+  build:
+    jobs:
+      - cypress/install:
+          name: 'Install & Validate Build'
           yarn: true
-          build: 'yarn validate'  #
+          build: 'yarn validate'
+          post-steps:
+            - persist_to_workspace:
+                root: .
+                paths:
+                  - public
+      - cypress/run:
+          name: 'Run E2E Tests'
+          requires:
+            - Install & Validate Build
+          parallel: true
+          parallelism: 4
+          group: 3 machines
           start: 'yarn serve'  # start server before running tests
           wait-on: 'http://localhost:9000'
-      - deploy:
+      - Deploy To Staging:
           filters:
             branches:
               only: master
           requires:
-            - cypress/run
+            - Install & Validate Build
+            - Run E2E Tests
