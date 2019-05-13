@@ -5,12 +5,15 @@
   "scripts": {
     "build": "yarn clean; gatsby build",
     "clean": "rm -rf public .cache",
+    "cy:open": "cypress open",
     "format": "easy-scripts format",
     "generate": "graphql-codegen",
     "lint": "easy-scripts lint; stylelint 'src/**/*.js'",
+    "serve": "gatsby serve",
     "setup": "node ./bin/setup.js",
     "start": "gatsby develop",
     "test": "easy-scripts test",
+    "test:e2e": "start-server-and-test start http://localhost:8000 cy:open",
     "validate": "easy-scripts validate"
   },
   "husky": {
@@ -39,7 +42,32 @@
     ]
   },
   "eslintConfig": {
+    "env": {
+      "cypress/globals": true
+    },
     "extends": "./node_modules/easy-scripts/dist/config/eslintrc.js",
+    "overrides": [
+      {
+        "files": [
+          "cypress/**/*"
+        ],
+        "rules": {
+          "jest/valid-expect": "off",
+          "no-console": "off",
+          "prefer-const": "off",
+          "babel/no-unused-expressions": "off",
+          "valid-jsdoc": "off",
+          "babel/camelcase": "off",
+          "func-names": "off",
+          "prefer-arrow-callback": "off",
+          "@typescript-eslint/camelcase": "off",
+          "max-lines-per-function": "off"
+        }
+      }
+    ],
+    "plugins": [
+      "eslint-plugin-cypress"
+    ],
     "rules": {
       "react/prop-types": "off",
       "jsx-a11y/label-has-for": "off",
@@ -141,12 +169,17 @@
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.14",
     "babel-preset-gatsby": "^0.1.11",
+    "cypress": "^3.2.0",
+    "cypress-testing-library": "^3.0.1",
     "easy-scripts": "^2.5.5",
+    "eslint-plugin-cypress": "^2.2.1",
     "graphql": "^14.2.1",
+    "is-ci-cli": "^1.1.1",
     "jest-axe": "3.1.0",
     "jest-dom": "^3.1.4",
     "react-testing-library": "^7.0.0",
     "schema-dts": "^0.3.1",
+    "start-server-and-test": "^1.9.0",
     "stylelint": "9.10.1",
     "stylelint-config-prettier": "^5.0.0",
     "stylelint-config-standard": "^18.2.0",

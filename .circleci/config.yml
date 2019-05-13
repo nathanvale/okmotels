@@ -1,40 +1,15 @@
-version: 2
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.7.0
 jobs:
-  validate:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.10.0
-    working_directory: ~/myDirectory
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/myDirectory
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: yarn install --frozen-lockfile
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: yarn validate
-      - persist_to_workspace:
-          root: .
-          paths: public
   deploy:
     docker:
       # specify the version you desire here
       - image: cibuilds/aws:latest
-    working_directory: ~/myDirectory
+    working_directory: ~/
     steps:
       - attach_workspace:
-          at: ~/myDirectory
+          at: ~/
       - deploy:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
@@ -43,11 +18,15 @@ jobs:
 workflows:
   version: 2
   build_and_deploy:
-    jobs:
-      - validate
+    jobs: # run a custom app build step
+      - cypress/run:
+          yarn: true
+          build: 'yarn validate'  #
+          start: 'yarn serve'  # start server before running tests
+          wait-on: 'http://localhost:9000'
       - deploy:
           filters:
             branches:
               only: master
           requires:
-            - validate
+            - cypress/run

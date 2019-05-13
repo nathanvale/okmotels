@@ -26,3 +26,6 @@ contentful-import-error-log*
 .env*
 .contentful.json
 .cache
+
+cypress/videos
+cypress/screenshots
