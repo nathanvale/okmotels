@@ -33,7 +33,7 @@ workflows:
           requires:
             - Install & Validate Build
           parallel: true
-          parallelism: 3
+          parallelism: 4
           group: 3 machines
           start: 'yarn serve'  # start server before running tests
           wait-on: 'http://localhost:9000'
