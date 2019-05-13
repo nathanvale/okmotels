@@ -14,7 +14,7 @@
     "start": "gatsby develop",
     "test": "easy-scripts test",
     "test:e2e": "start-server-and-test start http://localhost:8000 cy:open",
-    "validate": "easy-scripts validate"
+    "validate": "easy-scripts validate; ls"
   },
   "husky": {
     "hooks": {
