@@ -28,8 +28,6 @@ workflows:
                 root: .
                 paths:
                   - public
-                  - project
-                  - .cache/Cypress
       - cypress/run:
           name: 'Run E2E Tests'
           requires:
