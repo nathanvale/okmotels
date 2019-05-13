@@ -42,4 +42,5 @@ workflows:
             branches:
               only: master
           requires:
+            - Install & Validate Build
             - Run E2E Tests
