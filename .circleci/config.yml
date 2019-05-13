@@ -34,7 +34,6 @@ workflows:
           name: 'Run E2E Tests'
           requires:
             - Install & Validate Build
-          record: true
           parallel: true
           parallelism: 3
           group: 3 machines
