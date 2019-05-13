@@ -26,7 +26,8 @@ workflows:
           post-steps:
             - persist_to_workspace:
                 root: ~/
-                path: ./public
+                paths:
+                  - public
       - cypress/run:
           name: 'Run E2E Tests'
           requires:
