@@ -23,7 +23,7 @@ workflows:
           name: 'Install & Validate Build'
           yarn: true
           build: |
-            if [[ process.env.CIRCLE_BRANCH == "master" ]]; then
+            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               export CONTENTFUL_ENVIRONMENT=master 
             else
               export CONTENTFUL_ENVIRONMENT=development
