@@ -8,9 +8,10 @@
     "cy:open": "cypress open",
     "format": "easy-scripts format",
     "generate": "graphql-codegen",
-    "lint": "easy-scripts lint; stylelint 'src/**/*.js'",
+    "lint": "easy-scripts lint; stylelint 'src/**/*.{js.jsx,ts,tsx}'",
     "serve": "gatsby serve",
     "setup": "node ./bin/setup.js",
+    "migrate":"node scripts/migrate.js",
     "start": "gatsby develop",
     "test": "easy-scripts test",
     "test:e2e": "start-server-and-test start http://localhost:8000 cy:open",
@@ -20,7 +21,8 @@
     "hooks": {
       "commit-msg": "easy-scripts commitlint -e $HUSKY_GIT_PARAMS",
       "pre-commit": "easy-scripts pre-commit",
-      "post-rewrite": "easy-scripts pre-commit"
+      "post-rewrite": "easy-scripts pre-commit",
+      "post-checkout": "yarn migrate"
     }
   },
   "babel": {
@@ -169,9 +171,13 @@
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.14",
     "babel-preset-gatsby": "^0.1.11",
+    "contentful": "^7.6.0",
+    "contentful-management": "^5.1.4",
+    "contentful-migration": "^0.17.3",
     "cypress": "^3.2.0",
     "cypress-testing-library": "^3.0.1",
-    "easy-scripts": "^2.5.5",
+    "dotenv": "^8.0.0",
+    "easy-scripts": "^2.5.8",
     "eslint-plugin-cypress": "^2.2.1",
     "graphql": "^14.2.1",
     "is-ci-cli": "^1.1.1",

@@ -22,7 +22,13 @@ workflows:
       - cypress/install:
           name: 'Install & Validate Build'
           yarn: true
-          build: 'yarn validate'
+          build: |
+            if [[ "CI_$CIRCLE_BRANCH" == "master" ]]; then
+              export CONTENTFUL_ENVIRONMENT=master 
+            else
+              export CONTENTFUL_ENVIRONMENT=development
+            fi
+            yarn migrate && yarn validate
           post-steps:
             - persist_to_workspace:
                 root: .
@@ -34,7 +40,7 @@ workflows:
             - Install & Validate Build
           parallel: true
           parallelism: 4
-          group: 3 machines
+          group: 4 machines
           start: 'yarn serve'  # start server before running tests
           wait-on: 'http://localhost:9000'
       - Deploy To Staging:
