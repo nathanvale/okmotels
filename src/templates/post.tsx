@@ -11,7 +11,7 @@ import {TagList} from '../components/TagList'
 import {PostLinks} from '../components/PostLinks'
 import {PostDate} from '../components/PostDate'
 import {SEO} from '../components/SEO'
-import {PostTemplateQuery} from '../types/graphql'
+import {PostTemplateQuery} from '../../types/graphql'
 
 interface PostTemplateProps {
   data: PostTemplateQuery

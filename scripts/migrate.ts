@@ -6,22 +6,23 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
+import * as util from 'util'
+import {readdir} from 'fs'
+import path from 'path'
+import * as contentful from 'contentful-management'
+import * as runMigration from 'contentful-migration/built/bin/cli'
 
-;(async () => {
+const readdirAsync = util.promisify(readdir)
+
+require('dotenv').config()
+
+async function migrate(): Promise<string> {
   try {
-    require('dotenv').config()
-    const {promisify} = require('util')
-    const {readdir} = require('fs')
-    const readdirAsync = promisify(readdir)
-    const path = require('path')
-    const {createClient} = require('contentful-management')
-    const {
-      default: runMigration,
-    } = require('contentful-migration/built/bin/cli')
-
     // utility fns
-    const getVersionOfFile = file => file.replace('.js', '').replace(/_/g, '.')
-    const getFileOfVersion = version => `${version.replace(/\./g, '_')}.js`
+    const getVersionOfFile = (file: string) =>
+      file.replace('.js', '').replace(/_/g, '.')
+    const getFileOfVersion = (version: string) =>
+      `${version.replace(/\./g, '_')}.js`
 
     //
     // Configuration variables
@@ -33,7 +34,7 @@
     } = process.env
     const MIGRATIONS_DIR = path.join('.', 'migrations')
 
-    const client = createClient({
+    const client = contentful.createClient({
       accessToken: 'CFPAT-LCVgqVx98eSvfRUJV5XjLeB92glOc3dcXfguWzgCFnY',
     })
     const space = await client.getSpace(CONTENTFUL_SPACE_ID)
@@ -186,9 +187,15 @@
     }
 
     console.log('All done!')
+    return Promise.resolve('All done!')
   } catch (e) {
     console.error(e)
     // eslint-disable-next-line no-process-exit
     process.exit(1)
+    return Promise.resolve(e)
   }
+}
+
+;(async () => {
+  await migrate()
 })()

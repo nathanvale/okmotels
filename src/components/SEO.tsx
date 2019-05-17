@@ -17,8 +17,8 @@ import {
   Internal,
   PostTemplateQuery,
   PageTemplateQuery,
-} from '../types/graphql'
-import {Maybe} from '../types/custom-types'
+} from '../../types/graphql'
+import {Maybe} from '../../types/custom-types'
 
 type z = Maybe<
   Pick<ContentfulPage, 'title' | 'slug'> & {

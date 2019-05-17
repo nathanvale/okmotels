@@ -9,9 +9,9 @@
     "format": "easy-scripts format",
     "generate": "graphql-codegen",
     "lint": "easy-scripts lint; stylelint 'src/**/*.{js.jsx,ts,tsx}'",
+    "migrate": "babel-node scripts/migrate.ts -x .ts",
     "serve": "gatsby serve",
     "setup": "node ./bin/setup.js",
-    "migrate":"node scripts/migrate.js",
     "start": "gatsby develop",
     "test": "easy-scripts test",
     "test:e2e": "start-server-and-test start http://localhost:8000 cy:open",
@@ -71,6 +71,7 @@
       "eslint-plugin-cypress"
     ],
     "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
       "react/prop-types": "off",
       "jsx-a11y/label-has-for": "off",
       "react/jsx-pascal-case": "off",
@@ -82,7 +83,7 @@
     "static",
     ".cache",
     "coverage",
-    "src/types/graphql.ts"
+    "types/graphql.ts"
   ],
   "jest": {
     "coverageThreshold": {
@@ -160,6 +161,7 @@
     "typed-graphqlify": "^2.2.2"
   },
   "devDependencies": {
+    "@babel/node": "^7.2.2",
     "@graphql-codegen/cli": "^1.1.1",
     "@graphql-codegen/typescript": "^1.1.1",
     "@graphql-codegen/typescript-operations": "^1.1.1",

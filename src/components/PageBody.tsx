@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import idx from 'idx'
-import {MarkdownRemark} from '../types/graphql'
+import {MarkdownRemark} from '../../types/graphql'
 
 require('prismjs/themes/prism.css')
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'gatsby'
-import {ContentfulTag} from '../types/graphql'
-import {Maybe} from '../types/custom-types'
+import {ContentfulTag} from '../../types/graphql'
+import {Maybe} from '../../types/custom-types'
 
 // prettier-ignore
 interface TagListProps {

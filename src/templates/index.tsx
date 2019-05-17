@@ -8,7 +8,7 @@ import {Container} from '../components/Container'
 import {Pagination} from '../components/Pagination'
 import {SEO} from '../components/SEO'
 import config from '../utils/siteConfig'
-import {IndexTemplateQuery} from '../types/graphql'
+import {IndexTemplateQuery} from '../../types/graphql'
 
 interface IndexTempateProps {
   data: IndexTemplateQuery
