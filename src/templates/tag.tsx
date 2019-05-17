@@ -10,7 +10,7 @@ import {CardList} from '../components/CardList'
 import {PageTitle} from '../components/PageTitle'
 import {Pagination} from '../components/Pagination'
 import {Container} from '../components/Container'
-import {TagTemplateQuery} from '../types/graphql'
+import {TagTemplateQuery} from '../../types/graphql'
 
 interface TagProps {
   data: TagTemplateQuery

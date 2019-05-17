@@ -2,8 +2,8 @@ import React from 'react'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 import idx from 'idx'
-import {ContentfulAsset, ContentfulFluid} from '../types/graphql'
-import {Fluid} from '../types/custom-types'
+import {ContentfulAsset, ContentfulFluid} from '../../types/graphql'
+import {Fluid} from '../../types/custom-types'
 
 interface HeroProps {
   title?: string

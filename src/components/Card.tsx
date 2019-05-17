@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import {Link} from 'gatsby'
 import Img from 'gatsby-image'
 import idx from 'idx'
-import {Fluid} from '../types/custom-types'
+import {Fluid} from '../../types/custom-types'
 import {
   ContentfulAsset,
   MarkdownRemark,
   ContentfulFluid,
-} from '../types/graphql'
+} from '../../types/graphql'
 
 interface CardProps {
   title?: string
