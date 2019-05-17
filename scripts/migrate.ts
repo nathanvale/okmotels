@@ -10,7 +10,7 @@ import * as util from 'util'
 import {readdir} from 'fs'
 import path from 'path'
 import * as contentful from 'contentful-management'
-import * as runMigration from 'contentful-migration/built/bin/cli'
+import runMigration from 'contentful-migration/built/bin/cli'
 
 const readdirAsync = util.promisify(readdir)
 
@@ -20,9 +20,9 @@ async function migrate(): Promise<string> {
   try {
     // utility fns
     const getVersionOfFile = (file: string) =>
-      file.replace('.js', '').replace(/_/g, '.')
+      file.replace('.ts', '').replace(/_/g, '.')
     const getFileOfVersion = (version: string) =>
-      `${version.replace(/\./g, '_')}.js`
+      `${version.replace(/\./g, '_')}.ts`
 
     //
     // Configuration variables
@@ -35,7 +35,7 @@ async function migrate(): Promise<string> {
     const MIGRATIONS_DIR = path.join('.', 'migrations')
 
     const client = contentful.createClient({
-      accessToken: 'CFPAT-LCVgqVx98eSvfRUJV5XjLeB92glOc3dcXfguWzgCFnY',
+      accessToken: CONTENTFUL_CMA_TOKEN,
     })
     const space = await client.getSpace(CONTENTFUL_SPACE_ID)
 
@@ -123,7 +123,7 @@ async function migrate(): Promise<string> {
     // ---------------------------------------------------------------------------
     console.log('Read all the available migrations from the file system')
     const availableMigrations = (await readdirAsync(MIGRATIONS_DIR))
-      .filter(file => /^\d+?\.js$/.test(file))
+      .filter(file => /^\d+?\.ts$/.test(file))
       .map(file => getVersionOfFile(file))
 
     // ---------------------------------------------------------------------------

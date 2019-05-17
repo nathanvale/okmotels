@@ -4,7 +4,7 @@ module.exports = function(migration) {
     contentType: 'post',
     from: ['author'],
     to: ['author'],
-    transformEntryForLocale: function(fromFields, currentLocale) {
+    transformEntryForLocale: function() {
       const author = 'Nathan Vale'
       return {author}
     },
