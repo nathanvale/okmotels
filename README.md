@@ -79,7 +79,7 @@ gatsby new gatsby-starter-gcn https://github.com/ryanwiemer/gatsby-starter-gcn.g
 
 ### Website Data
 
-Edit [`/src/utils/siteConfig.js`](https://github.com/ryanwiemer/gatsby-starter-gcn/blob/master/src/utils/siteConfig.js)
+Edit [`/src/utils/site-config.js`](https://github.com/ryanwiemer/gatsby-starter-gcn/blob/master/src/utils/site-config.js)
 
 ```js
 module.exports = {
@@ -138,7 +138,7 @@ const theme = {
 
 ### Content and SEO
 
-1.  You can replace the `share.jpg` and `logo-512` files in the `static/logos` directory. After replacing these files ensure that you edit the image size dimensions specified in `/src/utils/siteConfig.js`
+1.  You can replace the `share.jpg` and `logo-512` files in the `static/logos` directory. After replacing these files ensure that you edit the image size dimensions specified in `/src/utils/site-config.js`
 2.  Meta descriptions are defined in Contentful. If you choose to leave this field blank on new posts a 320 character excerpt of the post/page will be used.
 3.  **IMPORTANT:** Be sure to manually enter at least one meta description on a page and post in Contentful or the site will fail to build.
 

@@ -27,7 +27,7 @@ function renderWithRouter(
   }
 }
 
-test('login page redirects to profile page on correct authentication', async () => {
+test.skip('login page redirects to profile page on correct authentication', async () => {
   const {
     getByLabelText,
     getByTestId,

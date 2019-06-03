@@ -1,9 +1,7 @@
-import React from 'react'
-import {ThemeProvider} from 'styled-components'
+import React, {Fragment} from 'react'
 import Helmet from 'react-helmet'
 import GlobalStyle from '../styles/global'
-import theme from '../styles/theme'
-import config from '../utils/siteConfig'
+import config from '../utils/site-config'
 import {Menu} from './Menu'
 import {Footer} from './Footer'
 
@@ -19,16 +17,13 @@ const Layout: React.FC = ({children}): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={favicon} />
       </Helmet>
-
-      <ThemeProvider theme={theme}>
-        <>
-          <div className="siteContent">
-            <Menu />
-            {children}
-          </div>
-          <Footer />
-        </>
-      </ThemeProvider>
+      <Fragment>
+        <div className="siteContent">
+          <Menu />
+          {children}
+        </div>
+        <Footer />
+      </Fragment>
       <GlobalStyle />
     </div>
   )

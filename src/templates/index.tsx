@@ -7,7 +7,7 @@ import {Card} from '../components/Card'
 import {Container} from '../components/Container'
 import {Pagination} from '../components/Pagination'
 import {SEO} from '../components/SEO'
-import config from '../utils/siteConfig'
+import config from '../utils/site-config'
 import {IndexTemplateQuery} from '../../types/graphql'
 
 interface IndexTempateProps {

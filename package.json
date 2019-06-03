@@ -26,6 +26,13 @@
     }
   },
   "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "dynamic-import-node"
+        ]
+      }
+    },
     "plugins": [
       "babel-plugin-idx",
       [
@@ -35,12 +42,11 @@
           "ssr": false,
           "pure": true
         }
-      ]
+      ],
+      "@babel/plugin-syntax-dynamic-import"
     ],
     "presets": [
-      [
-        "./node_modules/easy-scripts/dist/config/babelrc.js"
-      ]
+      "./node_modules/easy-scripts/dist/config/babelrc.js"
     ]
   },
   "eslintConfig": {
@@ -71,7 +77,8 @@
       "eslint-plugin-cypress"
     ],
     "rules": {
-      "@typescript-eslint/no-unused-vars":"error",
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-unused-vars": "error",
       "@typescript-eslint/explicit-function-return-type": "off",
       "react/prop-types": "off",
       "jsx-a11y/label-has-for": "off",
@@ -84,7 +91,9 @@
     "static",
     ".cache",
     "coverage",
-    "types/graphql.ts"
+    "types/graphql.ts",
+    "src/aws-exports.js",
+    "src/hacks"
   ],
   "jest": {
     "coverageThreshold": {
@@ -106,6 +115,8 @@
       "<rootDir>/src/globals.js"
     ],
     "setupFilesAfterEnv": [
+      "<rootDir>/src/setup-tests.js",
+      "react-app-polyfill/jsdom",
       "jest-axe/extend-expect",
       "jest-dom/extend-expect",
       "react-testing-library/cleanup-after-each"
@@ -123,12 +134,21 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
+    "@reach/dialog": "^0.2.8",
     "@reach/router": "^1.2.1",
+    "@reach/tooltip": "^0.2.0",
+    "@reach/visually-hidden": "^0.1.4",
+    "@types/faker": "^4.1.5",
+    "@types/match-sorter": "^2.3.0",
+    "aws-amplify": "^1.1.28",
+    "aws-amplify-react": "^2.3.8",
     "babel-plugin-idx": "^2.4.0",
     "babel-plugin-styled-components": "^1.10.0",
     "chalk": "^2.4.1",
     "contentful-import": "^7.4.3",
-    "gatsby": "^2.3.4",
+    "debounce-fn": "^3.0.1",
+    "faker": "^4.1.0",
+    "gatsby": "^2.6.3",
     "gatsby-image": "^2.0.25",
     "gatsby-plugin-canonical-urls": "^2.0.8",
     "gatsby-plugin-catch-links": "^2.0.9",
@@ -151,28 +171,38 @@
     "idx": "^2.5.5",
     "inquirer": "^6.2.1",
     "lodash": "^4.17.11",
+    "match-sorter": "^3.0.0",
     "moment": "^2.23.0",
     "path": "^0.12.7",
     "prismjs": "^1.15.0",
     "prop-types": "^15.7.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0",
+    "querystringify": "^2.1.1",
+    "react": "^16.8.6",
+    "react-async": "^6.2.0",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "react-icons": "^3.7.0",
+    "react-use": "^9.0.0",
+    "stop-runaway-react-effects": "^1.1.1",
     "styled-components": "^4.2.0",
+    "styled-loaders": "^0.3.0",
+    "styled-loaders-react": "^1.0.1",
     "typed-graphqlify": "^2.2.2"
   },
   "devDependencies": {
+    "@aws-amplify/cli": "^1.6.9",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@graphql-codegen/cli": "^1.1.1",
     "@graphql-codegen/typescript": "^1.1.1",
     "@graphql-codegen/typescript-operations": "^1.1.1",
-    "@types/jest": "^24.0.12",
+    "@types/jest": "^24.0.13",
     "@types/jest-axe": "^2.2.3",
     "@types/lodash": "^4.14.123",
-    "@types/react": "^16.8.8",
-    "@types/react-dom": "^16.8.2",
+    "@types/react": "^16.8.18",
+    "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.8",
-    "@types/styled-components": "^4.1.14",
+    "@types/styled-components": "^4.1.15",
     "babel-preset-gatsby": "^0.1.11",
     "contentful": "^7.6.0",
     "contentful-management": "^5.1.4",
@@ -184,16 +214,32 @@
     "eslint-plugin-cypress": "^2.2.1",
     "graphql": "^14.2.1",
     "is-ci-cli": "^1.1.1",
-    "jest-axe": "3.1.0",
-    "jest-dom": "^3.1.4",
-    "react-testing-library": "^7.0.0",
+    "jest": "^24.8.0",
+    "jest-axe": "3.1.1",
+    "jest-dom": "^3.4.0",
+    "jest-environment-jsdom": "^24.8.0",
+    "node-fetch": "^2.6.0",
+    "quokka-prerun": "^1.0.0",
+    "react-app-polyfill": "^1.0.1",
+    "react-testing-library": "^7.0.0yarn ",
     "schema-dts": "^0.3.1",
     "start-server-and-test": "^1.9.0",
-    "stylelint": "9.10.1",
+    "stylelint": "10.0.1",
     "stylelint-config-prettier": "^5.0.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.6.0",
-    "typescript": "^3.3.3"
+    "typescript": "3.3.4000"
+  },
+  "quokka": {
+    "env": {
+      "plugins": [
+        "quokka-prerun",
+        "jsdom-quokka-plugin"
+      ],
+      "params": {
+        "env": "REACT_APP_API_URL=http://localhost:8989/api"
+      }
+    }
   }
 }
