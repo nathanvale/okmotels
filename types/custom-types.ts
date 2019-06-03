@@ -19,6 +19,10 @@ export interface SignupFormPayload {
 }
 export interface User {
   id: string
+  emailVerified: boolean
+  phoneNumberVerified: boolean
+  phoneNumber: string
+  email: string
   username: string
 }
 export type UserPartial = Partial<{[key in keyof User]: User[key]}>

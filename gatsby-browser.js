@@ -2,10 +2,10 @@ import '@reach/dialog/styles.css'
 import './src/bootstrap'
 import Amplify, {Auth} from 'aws-amplify'
 import React from 'react'
-import awsConfig from './src/aws-exports'
+import awsmobile from './src/aws-exports'
 import {AppProviders} from './src/context'
 
-Amplify.configure(awsConfig)
+Amplify.configure(awsmobile)
 
 export const wrapRootElement = ({element}) => (
   <AppProviders>{element}</AppProviders>
