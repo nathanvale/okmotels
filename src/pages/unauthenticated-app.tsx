@@ -21,7 +21,12 @@ interface LoginFormProps {
   buttonText: string
 }
 function LoginForm({onSubmit, buttonText}: LoginFormProps) {
-  const {isPending, isRejected, error, run} = useCallbackStatus()
+  const {isPending, isRejected, error, run} = useCallbackStatus() as {
+    isPending: boolean
+    isRejected: boolean
+    run: (promise: Promise<void>) => Promise<void>
+    error: Error
+  }
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -210,7 +210,10 @@ const fakeResponses = [
   // fallback to originalFetch
   {
     test: () => true,
-    handler: (...args) => originalFetch(...args),
+    handler: (...args) => {
+      console.log(args)
+      return originalFetch(...args)
+    },
   },
 ]
 
