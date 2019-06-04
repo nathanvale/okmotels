@@ -9,9 +9,14 @@ import {
 } from '../../types/custom-types'
 
 function buildUser(overrides: UserPartial = {}): User {
+  const email = faker.internet.email()
   return {
     id: faker.random.uuid(),
-    username: faker.internet.userName(),
+    username: email,
+    email,
+    emailVerified: true,
+    phoneNumber: faker.phone.phoneNumber(),
+    phoneNumberVerified: true,
     ...overrides,
   }
 }

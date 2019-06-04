@@ -133,6 +133,7 @@
     ]
   },
   "dependencies": {
+    "@aws-amplify/auth": "^1.2.24",
     "@babel/runtime": "^7.4.3",
     "@reach/dialog": "^0.2.8",
     "@reach/router": "^1.2.1",
