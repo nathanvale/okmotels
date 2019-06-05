@@ -47,14 +47,15 @@ function AuthProvider(props: React.Props<any>) {
     if (isPending) {
       return <FullPageSpinner />
     }
-    if (isRejected) {
-      return (
-        <div style={{color: 'red'}}>
-          <p>Uh oh... There is a problem. Try refreshing the app.</p>
-          <pre>{error && error.message}</pre>
-        </div>
-      )
-    }
+  }
+
+  if (isRejected) {
+    return (
+      <div style={{color: 'red'}}>
+        <p>Uh oh... There is a problem. Try refreshing the app.</p>
+        <pre>{error && error.message}</pre>
+      </div>
+    )
   }
 
   const login = (form: LoginFormPayload) => authClient.login(form).then(reload)

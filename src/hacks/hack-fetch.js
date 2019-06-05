@@ -235,6 +235,7 @@ function getSubjectId(url) {
 }
 
 function getUser(config) {
+  debugger
   const token = config.headers.Authorization.replace('Bearer ', '')
   if (!token) {
     throw new Error('A token must be provided')
@@ -249,7 +250,10 @@ function getUser(config) {
 }
 
 window.fetch = async (...args) => {
-  console.log(args)
+  const [url] = args
+  if (url === 'https://cognito-idp.ap-southeast-2.amazonaws.com/') {
+    return originalFetch(...args)
+  }
   const {handler} = fakeResponses.find(({test}) => {
     try {
       return test(...args)
