@@ -21,8 +21,7 @@
     "hooks": {
       "commit-msg": "easy-scripts commitlint -e $HUSKY_GIT_PARAMS",
       "pre-commit": "easy-scripts pre-commit",
-      "post-rewrite": "easy-scripts pre-commit",
-      "post-checkout": "yarn migrate"
+      "post-rewrite": "easy-scripts pre-commit"
     }
   },
   "babel": {
