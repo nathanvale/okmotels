@@ -235,7 +235,6 @@ function getSubjectId(url) {
 }
 
 function getUser(config) {
-  debugger
   const token = config.headers.Authorization.replace('Bearer ', '')
   if (!token) {
     throw new Error('A token must be provided')

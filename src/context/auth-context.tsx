@@ -9,19 +9,17 @@ import {
   SignupFormPayload,
 } from '../../types/custom-types'
 
-interface AuthContextObject {
+export interface AuthContextObject {
   data: AuthContentData
   login: (form: LoginFormPayload) => Promise<void>
-  register: (form: SignupFormPayload) => Promise<void>
-  logout: () => Promise<void>
+  register: typeof authClient.register
+  logout: typeof authClient.logout
+  verifyEmail: typeof authClient.verifyEmail
 }
 
-const AuthContext = React.createContext<AuthContextObject>({
-  data: {user: null, listItems: []},
-  login: () => Promise.reject(),
-  register: () => Promise.reject(),
-  logout: () => Promise.reject(),
-})
+const AuthContext = React.createContext<AuthContextObject | undefined>(
+  undefined,
+)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function AuthProvider(props: React.Props<any>) {
@@ -59,11 +57,20 @@ function AuthProvider(props: React.Props<any>) {
   }
 
   const login = (form: LoginFormPayload) => authClient.login(form).then(reload)
-  const register = (form: SignupFormPayload) =>
-    authClient.register(form).then(reload)
+  const register = (form: SignupFormPayload) => authClient.register(form)
   const logout = () => authClient.logout().then(reload)
+  const verifyEmail = ({
+    email,
+    verificationCode,
+  }: {
+    email: string
+    verificationCode: string
+  }) => authClient.verifyEmail({email, verificationCode})
   return (
-    <AuthContext.Provider value={{data, login, logout, register}} {...props} />
+    <AuthContext.Provider
+      value={{data, login, logout, register, verifyEmail}}
+      {...props}
+    />
   )
 }
 

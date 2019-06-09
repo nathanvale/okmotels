@@ -1,4 +1,5 @@
 import '@reach/dialog/styles.css'
+import '@reach/tooltip/styles.css'
 import './src/bootstrap'
 import Amplify, {Auth} from 'aws-amplify'
 import React from 'react'
