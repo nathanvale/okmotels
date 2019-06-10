@@ -51,7 +51,7 @@ function useCallbackStatus() {
       (error: Error) => {
         safeSetState({status: 'rejected', error})
         //TODO: print in dev only
-        console.log(`FAILED promise in useCallbackStatus: ${error}`)
+        console.log(`FAILED promise in useCallbackStatus: ${error.message}`)
       },
     )
   }
