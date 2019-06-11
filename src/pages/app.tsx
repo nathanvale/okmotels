@@ -15,7 +15,7 @@ function App() {
   }, [])
   return (
     <React.Suspense fallback={<FullPageSpinner />}>
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </React.Suspense>
   )
 }
