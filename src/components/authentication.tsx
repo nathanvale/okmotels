@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import {css} from 'styled-components'
 import React from 'react'
 import {useAuth, AuthContextObject} from '../context/auth-context'
 import {useCallbackStatus} from '../utils/use-callback-status'
@@ -24,12 +24,15 @@ interface VerifyUserFormProps {
   onVerified: () => void
 }
 
-const ModalTitle = styled.h3({
-  textAlign: 'center',
-  fontSize: '2em',
-})
+interface LoginFormProps {
+  onComplete?: () => void
+}
 
-export function LoginForm() {
+interface RegisterFormProps {
+  onComplete?: () => void
+}
+
+export function LoginForm({onComplete}: LoginFormProps) {
   const {login, verifyEmail} = useAuth()
   const {isPending, isRejected, error, run} = useCallbackStatus()
   const [isVerifyRequired, setIsVerifyRequired] = React.useState(false)
@@ -79,7 +82,7 @@ export function LoginForm() {
   )
 }
 
-function RegisterForm() {
+function RegisterForm({onComplete}: RegisterFormProps) {
   const {login, register, verifyEmail} = useAuth()
   const [isUserRegistered, setIsUserRegistered] = React.useState(false)
   const [isUserVerified, setIsUserVerified] = React.useState(false)
@@ -225,18 +228,20 @@ interface RegisterModalProps {
 
 export function LoginModal({trigger}: LoginModalProps) {
   return (
-    <Modal trigger={trigger}>
-      <ModalTitle>Login</ModalTitle>
-      <LoginForm />
+    <Modal trigger={trigger} title="Login">
+      {({setState}) => (
+        <LoginForm onComplete={() => setState({showDialog: false})} />
+      )}
     </Modal>
   )
 }
 
 export function RegisterModal({trigger}: RegisterModalProps) {
   return (
-    <Modal trigger={trigger}>
-      <ModalTitle>Register</ModalTitle>
-      <RegisterForm />
+    <Modal trigger={trigger} title="Register">
+      {({setState}) => (
+        <RegisterForm onComplete={() => setState({showDialog: false})} />
+      )}
     </Modal>
   )
 }

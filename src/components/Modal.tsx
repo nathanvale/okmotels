@@ -1,26 +1,81 @@
-import {css} from 'styled-components'
+import styled, {css} from 'styled-components'
 import React, {ReactElement} from 'react'
 import VisuallyHidden from '@reach/visually-hidden'
-import {Dialog} from '@reach/dialog'
+import {Dialog, Component} from '@reach/dialog'
 import {CircleButton} from './lib'
 
 export interface ModalProps {
   trigger: ReactElement
-  children: React.ReactNode
+  title: string
+  warnOnDismiss?: boolean
+  children: (props: ModalRenderProps) => JSX.Element
+}
+interface ModalRenderProps {
+  setState: (value: Partial<ModalState>) => void
+  state: ModalState
+}
+interface ModalState {
+  showDialog: boolean
+  warn: boolean
 }
 
-export function Modal({trigger: button, children}: ModalProps) {
-  const [isOpen, setIsOpen] = React.useState(false)
+const ModalTitle = styled.h3({
+  textAlign: 'center',
+  fontSize: '2em',
+})
+
+export function Modal({
+  trigger,
+  title,
+  children,
+  warnOnDismiss = false,
+}: ModalProps) {
   return (
-    <React.Fragment>
-      {React.cloneElement(button, {
+    <Component<ModalState> initialState={{showDialog: false, warn: false}}>
+      {({setState, state}) => {
+        function onDismiss() {
+          if (warnOnDismiss) setState({warn: true})
+          else setState({showDialog: false})
+        }
+        return (
+          <React.Fragment>
+            {React.cloneElement(trigger, {
+              onClick: (event: Event) => {
+                event.preventDefault()
+                setState({showDialog: true})
+              },
+            })}
+            <Dialog isOpen={state.showDialog} onDismiss={onDismiss}>
+              <div css={css({display: 'flex', justifyContent: 'flex-end'})}>
+                <CircleButton onClick={() => setState({showDialog: false})}>
+                  <VisuallyHidden>Close</VisuallyHidden>
+                  <span aria-hidden>×</span>
+                </CircleButton>
+              </div>
+              <ModalTitle>{title}</ModalTitle>
+              {state.warn && (
+                <p style={{color: 'red'}}>You must make a choice, sorry :(</p>
+              )}
+              {children({
+                setState,
+                state,
+              })}
+            </Dialog>
+          </React.Fragment>
+        )
+      }}
+    </Component>
+  )
+}
+
+/*       {React.cloneElement(button, {
         onClick: async event => {
           event.preventDefault()
           //await new Promise(resolve => setTimeout(resolve, 0))
           setIsOpen(true)
         },
       })}
-      <Dialog isOpen={isOpen}>
+      <Dialog isOpen={isOpen} onDismiss={() => {}} style={{color: 'red'}}>
         <div css={css({display: 'flex', justifyContent: 'flex-end'})}>
           <CircleButton onClick={() => setIsOpen(false)}>
             <VisuallyHidden>Close</VisuallyHidden>
@@ -28,7 +83,4 @@ export function Modal({trigger: button, children}: ModalProps) {
           </CircleButton>
         </div>
         {children}
-      </Dialog>
-    </React.Fragment>
-  )
-}
+      </Dialog> */
