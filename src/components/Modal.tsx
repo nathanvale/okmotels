@@ -7,7 +7,7 @@ import {Dialog} from '@reach/dialog'
 import {CircleButton} from './lib'
 
 export interface ModalProps {
-  trigger: ReactElement
+  trigger: JSX.Element
   title: string
   warnOnDismiss?: boolean
   children: (props: ModalRenderProps) => JSX.Element
