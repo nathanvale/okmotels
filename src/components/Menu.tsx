@@ -90,7 +90,7 @@ const Menu: React.FC = (): JSX.Element => {
             </li>
           ) : (
             <li>
-              <LoginModal trigger={<a href="/">Login!</a>} />
+              <LoginModal trigger={<a href="/">Login</a>} />
             </li>
           )}
         </ul>

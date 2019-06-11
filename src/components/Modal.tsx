@@ -1,7 +1,9 @@
 import styled, {css} from 'styled-components'
 import React, {ReactElement} from 'react'
 import VisuallyHidden from '@reach/visually-hidden'
-import {Dialog, Component} from '@reach/dialog'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Component from '@reach/component-component'
+import {Dialog} from '@reach/dialog'
 import {CircleButton} from './lib'
 
 export interface ModalProps {
@@ -30,24 +32,43 @@ export function Modal({
   children,
   warnOnDismiss = false,
 }: ModalProps) {
+  let isMounted = false
+  function didMount() {
+    isMounted = true
+  }
+  function willUnmount() {
+    isMounted = false
+  }
   return (
-    <Component<ModalState> initialState={{showDialog: false, warn: false}}>
-      {({setState, state}) => {
+    <Component<ModalState>
+      initialState={{showDialog: false, warn: false}}
+      willUnmount={willUnmount}
+      didMount={didMount}
+    >
+      {({setState: _setState, state}) => {
+        function setState(value: Partial<ModalState>) {
+          if (isMounted) {
+            _setState(value)
+          }
+        }
         function onDismiss() {
           if (warnOnDismiss) setState({warn: true})
-          else setState({showDialog: false})
+          else _setState({showDialog: false})
+        }
+        function onClose() {
+          _setState({showDialog: false})
         }
         return (
           <React.Fragment>
             {React.cloneElement(trigger, {
               onClick: (event: Event) => {
                 event.preventDefault()
-                setState({showDialog: true})
+                _setState({showDialog: true})
               },
             })}
             <Dialog isOpen={state.showDialog} onDismiss={onDismiss}>
               <div css={css({display: 'flex', justifyContent: 'flex-end'})}>
-                <CircleButton onClick={() => setState({showDialog: false})}>
+                <CircleButton onClick={onClose}>
                   <VisuallyHidden>Close</VisuallyHidden>
                   <span aria-hidden>×</span>
                 </CircleButton>
