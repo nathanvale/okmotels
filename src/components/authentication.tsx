@@ -50,19 +50,21 @@ export function LoginForm({onComplete}: LoginFormProps) {
     setUser(payload)
 
     run(
-      login(payload).catch((e: Error) => {
-        if (e.message === 'User is not confirmed.') {
-          setIsVerifyRequired(true)
-        } else {
-          throw e
-        }
-      }),
+      login(payload)
+        .then(onComplete)
+        .catch((e: Error) => {
+          if (e.message === 'User is not confirmed.') {
+            setIsVerifyRequired(true)
+          } else {
+            throw e
+          }
+        }),
     )
   }
 
   function onVerified() {
     setIsVerifyRequired(false)
-    if (user) run(login(user))
+    if (user) run(login(user).then(onComplete))
   }
 
   return isVerifyRequired && user ? (
@@ -109,7 +111,7 @@ function RegisterForm({onComplete}: RegisterFormProps) {
 
   function onVerified() {
     setIsUserVerified(true)
-    if (user) run(login(user))
+    if (user) run(login(user).then(onComplete))
   }
 
   return isUserRegistered && !isUserVerified && user ? (

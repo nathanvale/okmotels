@@ -2,7 +2,7 @@ import React from 'react'
 import {Link, navigate} from 'gatsby'
 import styled from 'styled-components'
 import {getUser, isLoggedIn, logout} from '../services/auth'
-import {Modal} from './Modal'
+import {LoginModal} from './authentication'
 
 const Header = styled.header`
   background: ${props => props.theme.colors.base};
@@ -90,7 +90,7 @@ const Menu: React.FC = (): JSX.Element => {
             </li>
           ) : (
             <li>
-              <Modal trigger={<a href="/">Login!</a>}>Fuck</Modal>
+              <LoginModal trigger={<a href="/">Login!</a>} />
             </li>
           )}
         </ul>

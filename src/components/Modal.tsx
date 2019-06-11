@@ -67,20 +67,3 @@ export function Modal({
     </Component>
   )
 }
-
-/*       {React.cloneElement(button, {
-        onClick: async event => {
-          event.preventDefault()
-          //await new Promise(resolve => setTimeout(resolve, 0))
-          setIsOpen(true)
-        },
-      })}
-      <Dialog isOpen={isOpen} onDismiss={() => {}} style={{color: 'red'}}>
-        <div css={css({display: 'flex', justifyContent: 'flex-end'})}>
-          <CircleButton onClick={() => setIsOpen(false)}>
-            <VisuallyHidden>Close</VisuallyHidden>
-            <span aria-hidden>×</span>
-          </CircleButton>
-        </div>
-        {children}
-      </Dialog> */
