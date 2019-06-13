@@ -66,7 +66,7 @@ const spin = keyframes`
 `
 
 export const Spinner = styled(Spinner11).attrs(({size}) => ({
-  title: 'Loading',
+  title: 'Loazding',
   size: size ? size : '24',
 }))`
   animation: ${spin} 1s linear infinite;
@@ -82,12 +82,10 @@ export function FullPageSpinner() {
         margin-top: 100px;
       `}
     >
-      {ready ? (
-        <span title="Loading page..." role="alert" aria-live="assertive">
-          <Spinner size="48" />
-          <VisuallyHidden>Loading page...</VisuallyHidden>
-        </span>
-      ) : null}
+      <span title="Loading page..." role="alert" aria-live="assertive">
+        {ready ? <Spinner size="48" /> : null}
+        <VisuallyHidden>Loading page...</VisuallyHidden>
+      </span>
     </div>
   )
 }

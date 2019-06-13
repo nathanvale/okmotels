@@ -106,7 +106,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
     appearance: none;
-    border-radius: 0;
+    border-radius: 3px;
     resize: none;
     &:focus {
       outline: none;
@@ -139,25 +139,11 @@ const GlobalStyle = createGlobalStyle`
   }
 }
 
-#root {
-  color: #434449;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 textarea,
 input {
   border: 1px solid #f1f1f4;
   background: #f1f2f7;
   padding: 8px 12px;
-}
-
-button,
-input {
-  border-radius: 3px;
 }
 
 .visually-hidden {

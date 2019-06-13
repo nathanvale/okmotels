@@ -14,6 +14,7 @@ import {
 import * as gatsby from 'gatsby'
 import App from '../pages/app'
 import {mock} from '../test-helper'
+import {AppProviders} from '../context'
 
 jest.mock('gatsby')
 
@@ -22,12 +23,16 @@ function renderWithRouter(
   {route = '/', history = createHistory(createMemorySource(route))} = {},
 ): RenderResult & {history: History} {
   return {
-    ...render(<LocationProvider history={history}>{ui}</LocationProvider>),
+    ...render(
+      <LocationProvider history={history}>
+        <AppProviders>{ui}</AppProviders>
+      </LocationProvider>,
+    ),
     history,
   }
 }
 
-test.skip('login page redirects to profile page on correct authentication', async () => {
+test('login page redirects to profile page on correct authentication', async () => {
   const {
     getByLabelText,
     getByTestId,

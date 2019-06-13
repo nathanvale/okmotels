@@ -178,6 +178,7 @@ function VerifyUserForm({verifyEmail, email, onVerified}: VerifyUserFormProps) {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const {verificationCode} = (event.target as any).elements
 
     run(

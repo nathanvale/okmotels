@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {Router, Link, Redirect, RouteComponentProps} from '@reach/router'
-import styled, {css, DefaultTheme} from 'styled-components'
+import {css, DefaultTheme} from 'styled-components'
 import {ListItemProvider} from '../context/list-item-context'
 import {useAuth} from '../context/auth-context'
 import {useUser} from '../context/user-context'

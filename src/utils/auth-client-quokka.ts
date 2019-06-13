@@ -13,16 +13,16 @@ Amplify.configure(awsmobile)
 
 async function testLogin() {
   await logout()
-  // const cognitoUser: CognitoUser | null = await login({
-  //   username: 'hi@nathanvale.com',
-  //   password: 'Passw0rd1873!',
-  // })
-  // console.log(cognitoUser)
-  // let user: User | null = await getUser()
-  // console.log(user)
-  // await logout()
-  // user = await getUser()
-  // console.log(user)
+  const cognitoUser: CognitoUser | null = await login({
+    username: 'hi@nathanvale.com',
+    password: 'Passw0rd1873!',
+  })
+  console.log(cognitoUser)
+  let user: User | null = await getUser()
+  console.log(user)
+  await logout()
+  user = await getUser()
+  console.log(user)
 }
 
 ;(async () => {

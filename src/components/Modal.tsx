@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components'
-import React, {ReactElement} from 'react'
+import React from 'react'
 import VisuallyHidden from '@reach/visually-hidden'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Component from '@reach/component-component'
