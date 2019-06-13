@@ -87,7 +87,7 @@ export function FullPageSpinner() {
           <Spinner size="48" />
           <VisuallyHidden>Loading page...</VisuallyHidden>
         </span>
-      ) : nullga}
+      ) : null}
     </div>
   )
 }
