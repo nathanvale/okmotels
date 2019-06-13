@@ -1,6 +1,6 @@
 {
   "extends": "./node_modules/easy-scripts/dist/config/tsconfig.json",
-  "include": ["src", "types", "src/test"],
+  "include": ["src", "types"],
   "compilerOptions": {
     "declaration": false,
     "isolatedModules": false,

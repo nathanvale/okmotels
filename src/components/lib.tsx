@@ -1,7 +1,8 @@
-import styled, {css} from 'styled-components'
+import styled, {css, keyframes} from 'styled-components'
 import React from 'react'
-import {CubeGrid} from 'styled-loaders-react'
 import useTimeout from 'react-use/lib/useTimeout'
+import {Spinner11} from 'styled-icons/icomoon'
+import VisuallyHidden from '@reach/visually-hidden'
 
 export const Centered = styled.div`
   display: flex;
@@ -54,17 +55,39 @@ export const FormGroup = styled.div`
   flex-direction: column;
 `
 
-export const Spinner = () => (
-  <div aria-label="loading">
-    <CubeGrid />
-  </div>
-)
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+`
+
+export const Spinner = styled(Spinner11).attrs(({size}) => ({
+  title: 'Loading',
+  size: size ? size : '24',
+}))`
+  animation: ${spin} 1s linear infinite;
+`
 
 export function FullPageSpinner() {
   const ready = useTimeout(0)
   return (
-    <div css={css({marginTop: '3em', fontSize: '4em'})}>
-      {ready ? <Spinner /> : <Spinner />}
+    <div
+      css={css`
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+      `}
+    >
+      {ready ? (
+        <span title="Loading page..." role="alert" aria-live="assertive">
+          <Spinner size="48" />
+          <VisuallyHidden>Loading page...</VisuallyHidden>
+        </span>
+      ) : nullga}
     </div>
   )
 }

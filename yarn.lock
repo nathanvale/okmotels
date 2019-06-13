@@ -21812,10 +21812,13 @@ styled-components@^4.2.0:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
-styled-loaders-react@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/styled-loaders-react/-/styled-loaders-react-1.0.1.tgz#808f1e6036be5751395dcb6e2ea029d9b2e53154"
-  integrity sha512-wQZlYuoLTWbC4o1I2fvgHfw/B7y8vXq0kMMmA0aibEP6FBu1RwIBvjL/Xwywja2WPIq0w8pmirWN+G9ExAqXTQ==
+styled-icons@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-8.1.0.tgz#d3b2c2c563a24d4f186190c9f89baff02c394b79"
+  integrity sha512-/DgEIJRcIiyG6hCX8yl+xXucEc4wWhwY3BuT4H+8ZymuGYsvNjGIIOZ7+hXZI3owJK736LNHV9hTg1fG7CDkJg==
+  dependencies:
+    "@emotion/is-prop-valid" "^0.7.3"
+    tslib "^1.9.3"
 
 styled-loaders@^0.3.0:
   version "0.3.0"

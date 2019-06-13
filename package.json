@@ -53,6 +53,9 @@
       "cypress/globals": true
     },
     "extends": "./node_modules/easy-scripts/dist/config/eslintrc.js",
+    "globals": {
+      "__DEVELOPMENT__": true
+    },
     "overrides": [
       {
         "files": [
@@ -185,8 +188,8 @@
     "react-use": "^9.0.0",
     "stop-runaway-react-effects": "^1.1.1",
     "styled-components": "^4.2.0",
+    "styled-icons": "^8.1.0",
     "styled-loaders": "^0.3.0",
-    "styled-loaders-react": "^1.0.1",
     "typed-graphqlify": "^2.2.2"
   },
   "devDependencies": {

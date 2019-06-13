@@ -64,21 +64,22 @@ function AuthenticatedApp() {
   )
 }
 
-const NavLink = styled(Link)`
-  display: block;
-  padding: 8px 15px 8px 10px;
-  margin: 5px 0;
-  width: 100%;
-  height: 100%;
-  color: ${({theme}) => theme.colors.text};
-  border-radius: 2px;
-  border-left: 5px solid transparent;
-  :hover: {
-    color: ${({theme}) => theme.colors.indigo};
-    textdecoration: none;
-    background: ${({theme}) => theme.colors.gray10};
-  }
-`
+const NavLink = Link
+// const NavLink = styled(Link)`
+//   display: block;
+//   padding: 8px 15px 8px 10px;
+//   margin: 5px 0;
+//   width: 100%;
+//   height: 100%;
+//   color: ${({theme}) => theme.colors.text};
+//   border-radius: 2px;
+//   border-left: 5px solid transparent;
+//   :hover: {
+//     color: ${({theme}) => theme.colors.indigo};
+//     textdecoration: none;
+//     background: ${({theme}) => theme.colors.gray10};
+//   }
+// `
 
 interface NavProps {
   theme?: DefaultTheme

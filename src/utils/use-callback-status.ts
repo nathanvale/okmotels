@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
 function useIsMounted() {
@@ -33,8 +32,8 @@ function useCallbackStatus() {
 
   const isPending = status === 'pending'
   const isRejected = status === 'rejected'
-
   // eslint-disable-next-line require-await
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function run(promise: Promise<any>): void {
     if (!promise || !promise.then) {
       throw new Error(
@@ -51,7 +50,10 @@ function useCallbackStatus() {
       (error: Error) => {
         safeSetState({status: 'rejected', error})
         //TODO: print in dev only
-        console.log(`FAILED promise in useCallbackStatus: ${error.message}`)
+        if (__DEVELOPMENT__) {
+          // eslint-disable-next-line no-console
+          console.log(`FAILED promise in useCallbackStatus: ${error.message}`)
+        }
       },
     )
   }

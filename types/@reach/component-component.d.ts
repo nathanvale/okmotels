@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module '@reach/component-component' {
   export interface ComponentRenderProps<T> {
     state: T
@@ -19,5 +21,6 @@ declare module '@reach/component-component' {
     shouldUpdate?: any
     children: (props: ComponentRenderProps<T>) => JSX.Element
   }
+  // eslint-disable-next-line import/no-default-export
   export default <T>(props: ComponentProps<T>) => JSX.Element
 }

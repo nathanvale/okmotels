@@ -2,6 +2,16 @@ const config = require('./src/utils/site-config')
 
 const path = require(`path`)
 
+exports.onCreateWebpackConfig = ({stage, rules, loaders, plugins, actions}) => {
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.define({
+        __DEVELOPMENT__: stage === `develop` || stage === `develop-html`,
+      }),
+    ],
+  })
+}
+
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
 exports.onCreatePage = ({page, actions}) => {

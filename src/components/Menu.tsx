@@ -62,7 +62,7 @@ function AuthenticatedNav() {
           </Link>
         </li>
         <li>
-          <Link to="/app/" activeStyle={activeLinkStyle}>
+          <Link to="/app/list/" activeStyle={activeLinkStyle}>
             App
           </Link>
         </li>
