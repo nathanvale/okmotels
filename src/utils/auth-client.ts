@@ -44,7 +44,7 @@ window.__bookshelf.purgeUsers = () => {
   persist()
 }
 
- function getUser(): Promise<User | null> {
+function getUser(): Promise<User | null> {
   return (
     Auth.currentAuthenticatedUser({
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
