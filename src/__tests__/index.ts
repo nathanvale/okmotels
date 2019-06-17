@@ -32,7 +32,7 @@ test('booting up the app from the index file does not break anything', async () 
 const sleep = (t = Math.random() * 200 + 3000) =>
   new Promise(resolve => setTimeout(resolve, t))
 
-test.only('should show spinner when getting user', async () => {
+test.skip('should show spinner when getting user', async () => {
   console.log('fuck')
   console.log(Auth.currentAuthenticatedUser)
   expect(1).toBe(1)

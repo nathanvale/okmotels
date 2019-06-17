@@ -57,7 +57,7 @@ async function renderBookScreen({
     </ThemeProvider>,
   )
 
-  await waitForElementToBeRemoved(() => utils.queryByLabelText(/loading/i))
+  await waitForElementToBeRemoved(() => utils.queryByTitle(/Loading page.../i))
 
   window.fetch.mockClear()
 
@@ -128,7 +128,7 @@ test('can create a list item for the book', async () => {
 
   if (addToListButton)
     await waitForElementToBeRemoved(() =>
-      within(addToListButton).getByLabelText(/loading/i),
+      within(addToListButton).getByTitle(/^loading$/i),
     )
 
   getByLabelText(/mark as read/i)
@@ -164,7 +164,7 @@ test('can remove a list item for the book', async () => {
   expect(removeFromListButton).toBeDisabled()
   if (removeFromListButton)
     await waitForElementToBeRemoved(() =>
-      within(removeFromListButton).getByLabelText(/loading/i),
+      within(removeFromListButton).getByTitle(/^loading$/i),
     )
 
   getByLabelText(/add to list/i)
@@ -220,7 +220,7 @@ test('can mark a list item as read', async () => {
 
   if (markAsReadButton)
     await waitForElementToBeRemoved(() =>
-      within(markAsReadButton).getByLabelText(/loading/i),
+      within(markAsReadButton).getByTitle(/^loading$/i),
     )
 
   getByLabelText(/unmark as read/i)
