@@ -69,7 +69,8 @@ async function renderBookScreen({
   }
 }
 
-test('renders all the book information', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('renders all the book information', async () => {
   const {
     queryByLabelText,
     getByText,
@@ -93,7 +94,8 @@ test('renders all the book information', async () => {
   expect(queryByLabelText(/start date/i)).not.toBeInTheDocument()
 })
 
-test('can create a list item for the book', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('can create a list item for the book', async () => {
   const {getByLabelText, queryByLabelText, user, book} = await renderBookScreen(
     {listItem: null},
   )
@@ -141,7 +143,8 @@ test('can create a list item for the book', async () => {
   getByLabelText(/1 star/i)
 })
 
-test('can remove a list item for the book', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('can remove a list item for the book', async () => {
   const {getByLabelText, queryByLabelText, listItem} = await renderBookScreen()
 
   window.fetch.mockImplementationOnce(async (url, config) => {
@@ -177,7 +180,8 @@ test('can remove a list item for the book', async () => {
   expect(queryByLabelText(/start date/i)).not.toBeInTheDocument()
 })
 
-test('can mark a list item as read', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('can mark a list item as read', async () => {
   const user = buildUser()
   const book = buildBook()
   const listItem = buildListItem({
@@ -233,7 +237,8 @@ test('can mark a list item as read', async () => {
   getByLabelText(/1 star/i)
 })
 
-test('shows an error message when the book fails to load', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('shows an error message when the book fails to load', async () => {
   const user = buildUser()
 
   bootstrapAppDataMock.mockResolvedValueOnce({
@@ -263,12 +268,14 @@ test('shows an error message when the book fails to load', async () => {
   getByText(testError)
 })
 
-test('shows an error message when there is no book by the given id', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('shows an error message when there is no book by the given id', async () => {
   const {getByText} = await renderBookScreen({book: null})
   getByText(/try another/i)
 })
 
-test('can edit a note', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('can edit a note', async () => {
   const {getByLabelText, listItem} = await renderBookScreen()
 
   if (!listItem) return
@@ -305,7 +312,8 @@ test('can edit a note', async () => {
   expect(notesTextarea.value).toBe(newNotes)
 })
 
-test('note update failures are displayed', async () => {
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('note update failures are displayed', async () => {
   const {getByLabelText, listItem, getByText} = await renderBookScreen()
 
   if (!listItem) return

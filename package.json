@@ -8,7 +8,7 @@
     "cy:open": "cypress open",
     "format": "easy-scripts format",
     "generate": "graphql-codegen",
-    "lint": "easy-scripts lint; stylelint 'src/**/*.{js.jsx,ts,tsx}'",
+    "lint": "easy-scripts lint && stylelint 'src/**/*.{js.jsx,ts,tsx}'",
     "migrate": "babel-node scripts/migrate.ts -x .ts",
     "serve": "gatsby serve",
     "setup": "node ./bin/setup.js",
