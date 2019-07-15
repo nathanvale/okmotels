@@ -23,7 +23,6 @@ workflows:
           name: 'Install & Validate Build'
           yarn: true
           build: |
-            npm install -g @aws-amplify/cli 
             cd .circleci
             chmod +x headless_configure_project.sh
             chmod +x headless_init_env_auth.sh
