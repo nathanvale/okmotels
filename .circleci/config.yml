@@ -27,6 +27,7 @@ workflows:
             chmod +x headless_configure_project.sh
             chmod +x headless_init_env_auth.sh
             ./headless_configure_project.sh
+            ./headless_init_env_auth.sh
             if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               export CONTENTFUL_ENVIRONMENT=master 
             else

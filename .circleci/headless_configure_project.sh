@@ -9,7 +9,7 @@ REACTCONFIG="{\
 \"StartCommand\":\"yarn start\"\
 }"
 AWSCLOUDFORMATIONCONFIG="{\
-\"configLevel\":\"project\",\
+\"configLevel\":\"okmotels\",\
 \"useProfile\":true,\
 \"profileName\":\"default\",\
 \"accessKeyId\":\"${AWS_ACCESS_KEY_ID}\",\
