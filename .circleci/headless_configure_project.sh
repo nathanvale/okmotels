@@ -12,8 +12,8 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":true,\
 \"profileName\":\"default\",\
-\"accessKeyId\":\"AWS_ACCESS_KEY_ID\",\
-\"secretAccessKey\":\"AWS_SECRET_ACCESS_KEY\",\
+\"accessKeyId\":\"${AWS_ACCESS_KEY_ID}\",\
+\"secretAccessKey\":\"${AWS_SECRET_ACCESS_KEY}\",\
 \"region\":\"ap-southeast-2\"\
 }"
 AMPLIFY="{\
@@ -21,7 +21,7 @@ AMPLIFY="{\
 \"defaultEditor\":\"code\"\
 }"
 FRONTEND="{\
-\"frontend\":\"javascript\",\˝
+\"frontend\":\"javascript\",\
 \"framework\":\"react\",\
 \"config\":$REACTCONFIG\
 }"
