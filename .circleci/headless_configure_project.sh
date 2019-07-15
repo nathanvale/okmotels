@@ -9,7 +9,7 @@ REACTCONFIG="{\
 \"StartCommand\":\"yarn start\"\
 }"
 AWSCLOUDFORMATIONCONFIG="{\
-\"configLevel\":\"okmotels\",\
+\"configLevel\":\"project\",\
 \"useProfile\":true,\
 \"profileName\":\"default\",\
 \"accessKeyId\":\"${AWS_ACCESS_KEY_ID}\",\
@@ -29,6 +29,7 @@ PROVIDERS="{\
 \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
 }"
 
+cd ../
 npx amplify configure project \
 --amplify $AMPLIFY \
 --frontend $FRONTEND \
