@@ -4,7 +4,7 @@ IFS='|'
 
 REACTCONFIG="{\
 \"SourceDir\":\"src\",\
-\"DistributionDir\":\"build\",\
+\"DistributionDir\":\"public\",\
 \"BuildCommand\":\"yarn build\",\
 \"StartCommand\":\"yarn start\"\
 }"
@@ -17,11 +17,11 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"region\":\"ap-southeast-2\"\
 }"
 AMPLIFY="{\
-\"projectName\":\"headlessProjectName\",\
+\"projectName\":\"poc\",\
 \"defaultEditor\":\"code\"\
 }"
 FRONTEND="{\
-\"frontend\":\"javascript\",\
+\"frontend\":\"javascript\",\˝
 \"framework\":\"react\",\
 \"config\":$REACTCONFIG\
 }"
