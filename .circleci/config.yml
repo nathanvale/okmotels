@@ -23,6 +23,10 @@ workflows:
           name: 'Install & Validate Build'
           yarn: true
           build: |
+            cd .circleci
+            chmod +x headless_configure_project.sh
+            chmod +x headless_init_env_auth.sh
+            ./headless_configure_project.sh
             if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               export CONTENTFUL_ENVIRONMENT=master 
             else

@@ -13,9 +13,30 @@
     "categories": {
       "auth": {
         "cognito8b4dfb0d": {
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"348641635793472\",\"client_secret\":\"f4bdca9bce23fbbb4471a9182192a9df\"},{\"ProviderName\":\"Google\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"4DKoBJySbDKJr5ee6s9WsdkU\"}]",
-          "facebookAppId": "348641635793472",
-          "googleClientId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com"
+          "googleClientId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "facebookAppId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"},{\"ProviderName\":\"Google\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"}]"
+        }
+      }
+    }
+  },
+  "ci": {
+    "awscloudformation": {
+      "AuthRoleName": "poc-ci-20190715144040-authRole",
+      "UnauthRoleArn": "arn:aws:iam::279182895054:role/poc-ci-20190715144040-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::279182895054:role/poc-ci-20190715144040-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "poc-ci-20190715144040-deployment",
+      "UnauthRoleName": "poc-ci-20190715144040-unauthRole",
+      "StackName": "poc-ci-20190715144040",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:279182895054:stack/poc-ci-20190715144040/b32fe860-a6ba-11e9-a5ee-06753cca3fbe"
+    },
+    "categories": {
+      "auth": {
+        "cognito8b4dfb0d": {
+          "googleClientId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "facebookAppId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"},{\"ProviderName\":\"Google\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"}]"
         }
       }
     }
