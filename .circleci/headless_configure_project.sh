@@ -29,7 +29,6 @@ PROVIDERS="{\
 \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
 }"
 
-cd ../
 npx amplify configure project \
 --amplify $AMPLIFY \
 --frontend $FRONTEND \
