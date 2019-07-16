@@ -19,8 +19,6 @@ jobs:
         - ~/.cache
     - run:
         command: |
-            apt-get install -y sudo
-            sudo apt-get install -y expect
             cd .circleci
             chmod +x aws.sh
             chmod +x headless_init_env_auth.sh

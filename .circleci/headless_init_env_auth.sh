@@ -40,7 +40,7 @@ CATEGORIES="{\
 }"
 
 cd ../
-amplify init \
+npx amplify init \
 --amplify $AMPLIFY \
 --frontend $FRONTEND \
 --providers $PROVIDERS \
