@@ -24,6 +24,7 @@ jobs:
             cd .circleci
             chmod +x aws.sh
             chmod +x headless_init_env_auth.sh
+            cd ../
             expect .circleci/aws_configure.exp
             if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               export CONTENTFUL_ENVIRONMENT=master 
