@@ -19,6 +19,7 @@ jobs:
         - ~/.cache
     - run:
         command: |
+            apt-get install -y sudo
             sudo apt-get install -y expect
             cd .circleci
             chmod +x aws.sh
