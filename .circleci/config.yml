@@ -1,56 +1,87 @@
-version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.7.0
+version: 2
 jobs:
-  Deploy To Staging:
+  Install & Validate Build:
     docker:
-      # specify the version you desire here
-      - image: cibuilds/aws:latest
-    working_directory: ~/
+    - image: cypress/base:10
     steps:
-      - attach_workspace:
-          at: ~/
-      - deploy:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: |
-            aws s3 cp public/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - cypress/install:
-          name: 'Install & Validate Build'
-          yarn: true
-          build: |
+    - checkout
+    - restore_cache:
+        keys:
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+    - run:
+        name: Yarn install
+        command: yarn install --frozen-lockfile
+    - run:
+        command: npx cypress verify
+    - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.cache
+    - run:
+        command: |
+            sudo apt-get install -y expect
             cd .circleci
-            chmod +x headless_configure_project.sh
+            chmod +x aws.sh
             chmod +x headless_init_env_auth.sh
-            ./headless_configure_project.sh
+            expect .circleci/aws_configure.exp
             if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               export CONTENTFUL_ENVIRONMENT=master 
             else
               export CONTENTFUL_ENVIRONMENT=development
             fi
             yarn migrate && yarn validate
-          post-steps:
-            - persist_to_workspace:
-                root: .
-                paths:
-                  - public
-      - cypress/run:
-          name: 'Run E2E Tests'
-          requires:
-            - Install & Validate Build
-          parallel: true
-          parallelism: 4
-          group: 4 machines
-          start: 'yarn serve'  # start server before running tests
-          wait-on: 'http://localhost:9000'
-      - Deploy To Staging:
-          filters:
-            branches:
-              only: master
-          requires:
-            - Install & Validate Build
-            - Run E2E Tests
+    - persist_to_workspace:
+        root: ~/
+        paths:
+        - project
+        - .cache/Cypress
+    - persist_to_workspace:
+        root: .
+        paths:
+        - public
+  Run E2E Tests:
+    docker:
+    - image: cypress/base:10
+    parallelism: 4
+    steps:
+    - run:
+        command: echo "Assuming dependencies were installed using cypress/install
+          job"
+    - attach_workspace:
+        at: ~/
+    - run:
+        name: Start
+        command: yarn serve
+        background: true
+    - run:
+        name: Wait-on http://localhost:9000
+        command: npx wait-on http://localhost:9000
+    - run:
+        name: Run Cypress tests
+        command: "npx cypress run \\\n   \\\n   \\\n  "
+  Deploy To Staging:
+    docker:
+    - image: cibuilds/aws:latest
+    working_directory: ~/
+    steps:
+    - attach_workspace:
+        at: ~/
+    - deploy:
+        name: Deploy to S3 if tests pass and branch is Master
+        command: |
+          aws s3 cp public/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
+workflows:
+  version: 2
+  build:
+    jobs:
+    - Install & Validate Build
+    - Run E2E Tests:
+        requires:
+        - Install & Validate Build
+    - Deploy To Staging:
+        filters:
+          branches:
+            only: master
+        requires:
+        - Install & Validate Build
+        - Run E2E Tests
