@@ -23,7 +23,7 @@ jobs:
         command: npx cypress verify
     - run:
         name: "Install missing library on awscli"
-        command: sudo apt-get install -y libpython-dev      
+        command: apt-get install -y libpython-dev      
           - aws-cli/install
     - aws-cli/configure:
         aws-access-key-id: AWS_ACCESS_KEY_ID
