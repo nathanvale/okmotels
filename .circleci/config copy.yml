@@ -9,8 +9,9 @@ executors:
     docker:
       - image: cypress/base:10
 jobs:
-  Install:
-    executor: cypress
+  Install & Validate Build:
+    docker:
+    - image: cypress/base:10
     steps:
     - checkout
     - restore_cache:
@@ -21,24 +22,22 @@ jobs:
         command: yarn install --frozen-lockfile
     - run:
         command: npx cypress verify
-    - run:
-        name: "Install missing library on awscli"
-        command: sudo apt-get install -y libpython-dev      
-          - aws-cli/install
-    - aws-cli/configure:
-        aws-access-key-id: AWS_ACCESS_KEY_ID
-        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-        aws-region: AWS_DEFAULT_REGION
-    - run: sudo npm install -g @aws-amplify/cli
-    - run: amplify env list    
-    - run: chmod 777 .circleci/headless_configure_project.sh && .circleci/headless_configure_project.sh       # like @ambientlight mention in #1236 
-    - run: amplify env checkout dev
-    - run: amplify env pull --yes
-    - run: amplify publish --invalidateCloudFront --yes      
     - save_cache:
         key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
         - ~/.cache
+    - run:
+        command: |
+            cd .circleci
+            chmod +x aws.sh
+            chmod +x headless_init_env_auth.sh
+            ./headless_init_env_auth.sh
+            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
+              export CONTENTFUL_ENVIRONMENT=master 
+            else
+              export CONTENTFUL_ENVIRONMENT=development
+            fi
+            yarn migrate && yarn validate
     - persist_to_workspace:
         root: ~/
         paths:
@@ -48,7 +47,6 @@ jobs:
         root: .
         paths:
         - public
-  
   Run E2E Tests:
     docker:
     - image: cypress/base:10
@@ -84,14 +82,14 @@ workflows:
   version: 2
   build:
     jobs:
-    - Install
+    - Install & Validate Build
     - Run E2E Tests:
         requires:
-        - Install
+        - Install & Validate Build
     - Deploy To Staging:
         filters:
           branches:
             only: master
         requires:
-        - Install
+        - Install & Validate Build
         - Run E2E Tests

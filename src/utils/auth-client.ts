@@ -9,14 +9,8 @@ import '../bootstrap'
 
 import {UserPoolAttributes} from '../../types/aws-types'
 
-const localStorageKey = '__bookshelf_token__'
-const usersKey = '__bookshelf_users__'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const users: any = {}
-const persist = () =>
-  window.localStorage.setItem(usersKey, JSON.stringify(users))
-const load = () =>
-  Object.assign(users, JSON.parse(window.localStorage.getItem(usersKey) || ''))
 
 const parseError = (e: string | Error) => {
   if (typeof e === 'string') {
@@ -24,24 +18,6 @@ const parseError = (e: string | Error) => {
   } else {
     throw e
   }
-}
-
-// initialize
-try {
-  load()
-} catch (error) {
-  persist()
-  // ignore json parse error
-}
-
-//@ts-ignore
-window.__bookshelf = window.__bookshelf || {}
-//@ts-ignore
-window.__bookshelf.purgeUsers = () => {
-  Object.keys(users).forEach(key => {
-    delete users[key]
-  })
-  persist()
 }
 
 function getUser(): Promise<User | null> {
@@ -81,8 +57,6 @@ async function login({username, password}: LoginFormPayload) {
     username, // Required, the username
     password, // Optional, the password
   }).catch(parseError)
-  const token = btoa(result.username)
-  window.localStorage.setItem(localStorageKey, token)
   return result
 }
 
@@ -94,18 +68,14 @@ async function register({username, password}: SignupFormPayload) {
 
   const id = result.userSub
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const token = btoa(id)
-  window.localStorage.setItem(localStorageKey, token)
   users[id] = {
     id,
     username,
   }
-  persist()
   return result
 }
 
 function logout(): Promise<void> {
-  window.localStorage.removeItem(localStorageKey)
   return Auth.signOut().catch(parseError)
 }
 
