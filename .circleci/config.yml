@@ -18,7 +18,16 @@ jobs:
         - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
     - run:
         name: Yarn install
-        command: yarn install --frozen-lockfile && yarn validate
+        command: yarn install --frozen-lockfile
+    - aws-cli/install
+    - aws-cli/configure:
+        aws-access-key-id: AWS_ACCESS_KEY_ID
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+        aws-region: AWS_DEFAULT_REGION
+    - run: ./node_modules/.bin/amplify env list    
+    - run: chmod 777 .circleci/headless_configure_project.sh && .circleci/headless_configure_project.sh       # like @ambientlight mention in #1236 
+    - run: ./node_modules/.bin/amplify env checkout dev
+    - run: ./node_modules/.bin/amplify env pull --yes  
     - run:
         command: npx cypress verify
     - run:
@@ -34,23 +43,7 @@ jobs:
         - project
         - .cache/Cypress
         - public
-
-  
-  AWS:
-    executor: node
-    steps:
-    - aws-cli/install
-    - aws-cli/configure:
-        aws-access-key-id: AWS_ACCESS_KEY_ID
-        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-        aws-region: AWS_DEFAULT_REGION
-    - run: sudo npm install -g @aws-amplify/cli
-    - run: amplify env list    
-    - run: chmod 777 .circleci/headless_configure_project.sh && .circleci/headless_configure_project.sh       # like @ambientlight mention in #1236 
-    - run: amplify env checkout dev
-    - run: amplify env pull --yes
-    - run: amplify publish --invalidateCloudFront --yes      
-
+      
   Run E2E Tests:
     docker:
     - image: cypress/base:10
@@ -87,7 +80,6 @@ workflows:
   build:
     jobs:
     - Install
-    - AWS
     - Run E2E Tests:
         requires:
         - Install
