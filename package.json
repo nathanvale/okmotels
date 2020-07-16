@@ -150,7 +150,7 @@
     "gatsby-transformer-remark": "^2.1.17",
     "idx": "^2.5.5",
     "inquirer": "^6.2.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.23.0",
     "path": "^0.12.7",
     "prismjs": "^1.15.0",
