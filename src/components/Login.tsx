@@ -30,7 +30,7 @@ class Login extends React.Component<RouteComponentProps> {
     }
 
     return (
-      <>
+      <React.Fragment>
         <Helmet>
           <title>{`Login`}</title>
         </Helmet>
@@ -66,7 +66,7 @@ class Login extends React.Component<RouteComponentProps> {
             <Submit type="submit" value="Log In" />
           </Form>
         </Container>
-      </>
+      </React.Fragment>
     )
   }
 }

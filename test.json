@@ -1,0 +1,48 @@
+{
+  "presets": [
+    [
+      "/Users/nathanvale/code/okmotels/node_modules/@babel/preset-env/lib/index.js",
+      {
+        "modules": false,
+        "loose": true,
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    [
+      "/Users/nathanvale/code/okmotels/node_modules/@babel/preset-react/lib/index.js",
+      {}
+    ],
+    [
+      "/Users/nathanvale/code/okmotels/node_modules/@babel/preset-typescript/lib/index.js"
+    ]
+  ],
+  "plugins": [
+    [
+      "/Users/nathanvale/code/okmotels/node_modules/@babel/plugin-syntax-dynamic-import/lib/index.js",
+      "/Users/nathanvale/code/okmotels/node_modules/@babel/plugin-transform-runtime/lib/index.js",
+      {
+        "corejs": false,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
+    ],
+    "/Users/nathanvale/code/okmotels/node_modules/babel-plugin-macros/dist/index.js",
+    [
+      "/Users/nathanvale/code/okmotels/node_modules/babel-plugin-transform-react-remove-prop-types/lib/index.js",
+      {
+        "mode": "unsafe-wrap"
+      }
+    ],
+    [
+      "/Users/nathanvale/code/okmotels/node_modules/@babel/plugin-proposal-class-properties/lib/index.js",
+      {
+        "loose": true
+      }
+    ],
+    "/Users/nathanvale/code/okmotels/node_modules/babel-plugin-minify-dead-code-elimination/lib/index.js",
+    "/Users/nathanvale/code/okmotels/node_modules/@babel/plugin-transform-modules-commonjs/lib/index.js"
+  ]
+}

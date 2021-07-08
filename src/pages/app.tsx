@@ -1,18 +1,24 @@
 import React from 'react'
-import {Router} from '@reach/router'
-import {Layout} from '../components/Layout'
-import {Profile} from '../components/Profile'
-import {Login} from '../components/Login'
-import {PrivateRoute} from '../components/PrivateRoute'
+import {FullPageSpinner} from '../components/lib'
+import {useUser} from '../context/user-context'
 
-const App = (): JSX.Element => (
-  <Layout>
-    <Router>
-      <PrivateRoute path="/app/profile" component={Profile} />
-      <Login path="/app/login" />
-    </Router>
-  </Layout>
-)
+const loadAuthenticatedApp = () => import('./authenticated-app')
+const AuthenticatedApp = React.lazy(loadAuthenticatedApp)
+const UnauthenticatedApp = React.lazy(() => import('./unauthenticated-app'))
+
+function App() {
+  const user = useUser()
+  // pre-load the authenticated side in the background while the user's
+  // filling out the login form.
+  React.useLayoutEffect(() => {
+    loadAuthenticatedApp()
+  }, [])
+  return (
+    <React.Suspense fallback={<FullPageSpinner />}>
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    </React.Suspense>
+  )
+}
 
 // eslint-disable-next-line import/no-default-export
 export default App

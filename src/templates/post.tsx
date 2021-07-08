@@ -2,7 +2,7 @@ import React from 'react'
 import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
 
-import config from '../utils/siteConfig'
+import config from '../utils/site-config'
 import {Layout} from '../components/Layout'
 import {Hero} from '../components/Hero'
 import {Container} from '../components/Container'

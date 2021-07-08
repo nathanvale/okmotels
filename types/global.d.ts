@@ -1,5 +1,6 @@
-import 'styled-components'
+import 'jest-dom/extend-expect'
 
+declare module '@aws-amplify/auth'
 declare module 'contentful-management'
 declare module 'contentful-migration/built/bin/cli'
 
@@ -8,24 +9,14 @@ declare module '*.ico' {
   // eslint-disable-next-line import/no-default-export
   export default content
 }
-
-// and extend them!
-declare module 'styled-components' {
-  export interface DefaultTheme {
-    colors: {
-      base: string
-      secondary: string
-      tertiary: string
-      highlight: string
-    }
-    sizes: {
-      maxWidth: string
-      maxWidthCentered: string
-    }
-    responsive: {
-      small: string
-      medium: string
-      large: string
-    }
+declare global {
+  interface Window {
+    fetch: ((input: RequestInfo, init?: RequestInit) => Promise<Response>) &
+      jest.Mock
   }
 }
+declare module 'console' {
+  export = typeof import('console')
+}
+
+// and extend them!

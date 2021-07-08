@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable babel/camelcase */
-const config = require('./src/utils/siteConfig')
+
+const config = require('./src/utils/site-config')
 
 let contentfulConfig
 

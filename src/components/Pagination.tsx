@@ -32,16 +32,18 @@ const Wrapper = styled.div`
     }
   }
 `
+const PreviousLink = Link
 
-const PreviousLink = styled(Link)`
-  margin-right: auto;
-  order: 1;
-`
+// const PreviousLink = styled(Link)`
+//   margin-right: auto;
+//   order: 1;
+// `
 
-const NextLink = styled(Link)`
-  margin-left: auto;
-  order: 3;
-`
+const NextLink = Link
+// const NextLink = styled(Link)`
+//   margin-left: auto;
+//   order: 3;
+// `
 
 const PageIndicator = styled.span`
   color: gray;

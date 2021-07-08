@@ -1,0 +1,95 @@
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.13
+executors:
+  node:
+    docker:
+      - image: circleci/node:12.4.0
+  cypress:
+    docker:
+      - image: cypress/base:10
+jobs:
+  Install & Validate Build:
+    docker:
+    - image: cypress/base:10
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+    - run:
+        name: Yarn install
+        command: yarn install --frozen-lockfile
+    - run:
+        command: npx cypress verify
+    - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.cache
+    - run:
+        command: |
+            cd .circleci
+            chmod +x aws.sh
+            chmod +x headless_init_env_auth.sh
+            ./headless_init_env_auth.sh
+            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
+              export CONTENTFUL_ENVIRONMENT=master 
+            else
+              export CONTENTFUL_ENVIRONMENT=development
+            fi
+            yarn migrate && yarn validate
+    - persist_to_workspace:
+        root: ~/
+        paths:
+        - project
+        - .cache/Cypress
+    - persist_to_workspace:
+        root: .
+        paths:
+        - public
+  Run E2E Tests:
+    docker:
+    - image: cypress/base:10
+    parallelism: 4
+    steps:
+    - run:
+        command: echo "Assuming dependencies were installed using cypress/install
+          job"
+    - attach_workspace:
+        at: ~/
+    - run:
+        name: Start
+        command: yarn serve
+        background: true
+    - run:
+        name: Wait-on http://localhost:9000
+        command: npx wait-on http://localhost:9000
+    - run:
+        name: Run Cypress tests
+        command: "npx cypress run \\\n   \\\n   \\\n  "
+  Deploy To Staging:
+    docker:
+    - image: cibuilds/aws:latest
+    working_directory: ~/
+    steps:
+    - attach_workspace:
+        at: ~/
+    - deploy:
+        name: Deploy to S3 if tests pass and branch is Master
+        command: |
+          aws s3 cp public/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
+workflows:
+  version: 2
+  build:
+    jobs:
+    - Install & Validate Build
+    - Run E2E Tests:
+        requires:
+        - Install & Validate Build
+    - Deploy To Staging:
+        filters:
+          branches:
+            only: master
+        requires:
+        - Install & Validate Build
+        - Run E2E Tests

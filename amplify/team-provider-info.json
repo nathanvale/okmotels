@@ -1,0 +1,44 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "poc-dev-20190521114320-authRole",
+      "UnauthRoleArn": "arn:aws:iam::279182895054:role/poc-dev-20190521114320-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::279182895054:role/poc-dev-20190521114320-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "poc-dev-20190521114320-deployment",
+      "UnauthRoleName": "poc-dev-20190521114320-unauthRole",
+      "StackName": "poc-dev-20190521114320",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:279182895054:stack/poc-dev-20190521114320/d08265e0-7b69-11e9-842f-02d286d7265a"
+    },
+    "categories": {
+      "auth": {
+        "cognito8b4dfb0d": {
+          "googleClientId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "facebookAppId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"},{\"ProviderName\":\"Google\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"}]"
+        }
+      }
+    }
+  },
+  "ci": {
+    "awscloudformation": {
+      "AuthRoleName": "poc-ci-20190715144040-authRole",
+      "UnauthRoleArn": "arn:aws:iam::279182895054:role/poc-ci-20190715144040-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::279182895054:role/poc-ci-20190715144040-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "poc-ci-20190715144040-deployment",
+      "UnauthRoleName": "poc-ci-20190715144040-unauthRole",
+      "StackName": "poc-ci-20190715144040",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:279182895054:stack/poc-ci-20190715144040/b32fe860-a6ba-11e9-a5ee-06753cca3fbe"
+    },
+    "categories": {
+      "auth": {
+        "cognito8b4dfb0d": {
+          "googleClientId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "facebookAppId": "74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"},{\"ProviderName\":\"Google\",\"client_id\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\",\"client_secret\":\"74790736152-9g3g9h2b870671asgpedml9rjcpec7vd.apps.googleusercontent.com\"}]"
+        }
+      }
+    }
+  }
+}

@@ -1,52 +1,93 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.7.0
+  aws-cli: circleci/aws-cli@0.1.13
+executors:
+  node:
+    docker:
+      - image: circleci/node:12.4.0
+  cypress:
+    docker:
+      - image: cypress/base:10
 jobs:
+  Install:
+    executor: cypress
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+    - run:
+        name: Yarn install
+        command: yarn install --frozen-lockfile
+    - run: sudo apt-get install -y libpython-dev    
+    - aws-cli/install
+    - aws-cli/configure:
+        aws-access-key-id: AWS_ACCESS_KEY_ID
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+        aws-region: AWS_DEFAULT_REGION
+    - run: ./node_modules/.bin/amplify env list    
+    - run: chmod 777 .circleci/headless_configure_project.sh && .circleci/headless_configure_project.sh       # like @ambientlight mention in #1236 
+    - run: ./node_modules/.bin/amplify env checkout dev
+    - run: ./node_modules/.bin/amplify env pull --yes  
+    - run:
+        command: npx cypress verify
+    - run:
+        name: "Install missing library on awscli"
+        command: apt-get install -y libpython-dev      
+    - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.cache
+    - persist_to_workspace:
+        root: ~/
+        paths:
+        - project
+        - .cache/Cypress
+        - public
+      
+  Run E2E Tests:
+    docker:
+    - image: cypress/base:10
+    parallelism: 4
+    steps:
+    - run:
+        command: echo "Assuming dependencies were installed using cypress/install
+          job"
+    - attach_workspace:
+        at: ~/
+    - run:
+        name: Start
+        command: yarn serve
+        background: true
+    - run:
+        name: Wait-on http://localhost:9000
+        command: npx wait-on http://localhost:9000
+    - run:
+        name: Run Cypress tests
+        command: "npx cypress run \\\n   \\\n   \\\n  "
   Deploy To Staging:
     docker:
-      # specify the version you desire here
-      - image: cibuilds/aws:latest
+    - image: cibuilds/aws:latest
     working_directory: ~/
     steps:
-      - attach_workspace:
-          at: ~/
-      - deploy:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: |
-            aws s3 cp public/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
-
+    - attach_workspace:
+        at: ~/
+    - deploy:
+        name: Deploy to S3 if tests pass and branch is Master
+        command: |
+          aws s3 cp public/ s3://nathanvale.dev --recursive && aws cloudfront create-invalidation --distribution-id E1MF21UE0533BK --paths /*
 workflows:
   version: 2
   build:
     jobs:
-      - cypress/install:
-          name: 'Install & Validate Build'
-          yarn: true
-          build: |
-            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
-              export CONTENTFUL_ENVIRONMENT=master 
-            else
-              export CONTENTFUL_ENVIRONMENT=development
-            fi
-            yarn migrate && yarn validate
-          post-steps:
-            - persist_to_workspace:
-                root: .
-                paths:
-                  - public
-      - cypress/run:
-          name: 'Run E2E Tests'
-          requires:
-            - Install & Validate Build
-          parallel: true
-          parallelism: 4
-          group: 4 machines
-          start: 'yarn serve'  # start server before running tests
-          wait-on: 'http://localhost:9000'
-      - Deploy To Staging:
-          filters:
-            branches:
-              only: master
-          requires:
-            - Install & Validate Build
-            - Run E2E Tests
+    - Install
+    - Run E2E Tests:
+        requires:
+        - Install
+    - Deploy To Staging:
+        filters:
+          branches:
+            only: master
+        requires:
+        - Install
+        - Run E2E Tests

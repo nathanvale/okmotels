@@ -14,7 +14,9 @@ import runMigration from 'contentful-migration/built/bin/cli'
 
 const readdirAsync = util.promisify(readdir)
 
-require('dotenv').config()
+require('dotenv').config({
+  path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`),
+})
 
 async function migrate(): Promise<string> {
   try {

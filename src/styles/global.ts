@@ -106,7 +106,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
     appearance: none;
-    border-radius: 0;
+    border-radius: 3px;
     resize: none;
     &:focus {
       outline: none;
@@ -115,6 +115,48 @@ const GlobalStyle = createGlobalStyle`
       box-shadow: none;
     }
   }
+
+  #root {
+  color: #434449;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-reach-dialog-content] {
+  max-width: 450px;
+  border-radius: 3px;
+  padding-bottom: 3.5em;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+  margin: 20vh auto;
+}
+@media (max-width: 991px) {
+  [data-reach-dialog-content] {
+    width: 100%;
+    margin: 10vh auto;
+  }
+}
+
+textarea,
+input {
+  border: 1px solid #f1f1f4;
+  background: #f1f2f7;
+  padding: 8px 12px;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 `
 // eslint-disable-next-line import/no-default-export
 export default GlobalStyle

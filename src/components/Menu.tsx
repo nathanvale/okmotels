@@ -1,7 +1,9 @@
 import React from 'react'
-import {Link, navigate} from 'gatsby'
+import {Link} from 'gatsby'
 import styled from 'styled-components'
-import {getUser, isLoggedIn, logout} from '../services/auth'
+import {useUser} from '../context/user-context'
+import {LoginModal, RegisterModal} from './authentication'
+import {Logout} from './logout'
 
 const Header = styled.header`
   background: ${props => props.theme.colors.base};
@@ -34,6 +36,7 @@ const Nav = styled.nav`
   }
 
   a {
+    white-space: nowrap;
     text-decoration: none;
     color: DarkGray;
     font-weight: 600;
@@ -49,55 +52,69 @@ const activeLinkStyle = {
   color: 'white',
 }
 
-const Menu: React.FC = (): JSX.Element => {
-  const content = {message: '', login: true}
-  if (isLoggedIn()) {
-    content.message = `Hello, ${getUser().name}`
-  } else {
-    content.message = 'You are not logged in'
-  }
+function AuthenticatedNav() {
   return (
-    <Header>
-      <Nav>
-        <ul>
-          <li>
-            <Link to="/" activeStyle={activeLinkStyle}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about/" activeStyle={activeLinkStyle}>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact/" activeStyle={activeLinkStyle}>
-              Contact
-            </Link>
-          </li>
-          {isLoggedIn() ? (
-            <li>
-              <a
-                href="/"
-                onClick={event => {
-                  event.preventDefault()
-                  logout(() => navigate(`/app/login`))
-                }}
-              >
-                Logout
-              </a>
-            </li>
-          ) : (
-            <li>
-              <Link to="/app/login" activeStyle={activeLinkStyle}>
-                Login
-              </Link>
-            </li>
-          )}
-        </ul>
-      </Nav>
-    </Header>
+    <Nav>
+      <ul>
+        <li>
+          <Link to="/" activeStyle={activeLinkStyle}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/app/list/" activeStyle={activeLinkStyle}>
+            App
+          </Link>
+        </li>
+        <li>
+          <Link to="/about/" activeStyle={activeLinkStyle}>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="/contact/" activeStyle={activeLinkStyle}>
+            Contact
+          </Link>
+        </li>
+        <li>
+          <Logout trigger={<a href="/">Logout</a>} />
+        </li>
+      </ul>
+    </Nav>
   )
 }
 
-export {Menu}
+function UnAuthenticatedNav() {
+  return (
+    <Nav>
+      <ul>
+        <li>
+          <Link to="/" activeStyle={activeLinkStyle}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/about/" activeStyle={activeLinkStyle}>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="/contact/" activeStyle={activeLinkStyle}>
+            Contact
+          </Link>
+        </li>
+        <li>
+          <RegisterModal trigger={<a href="/">Sign in</a>} />
+        </li>
+        <li>
+          <LoginModal trigger={<a href="/">Log in</a>} />
+        </li>
+      </ul>
+    </Nav>
+  )
+}
+
+export function Menu() {
+  const user = useUser()
+  return <Header>{user ? <AuthenticatedNav /> : <UnAuthenticatedNav />}</Header>
+}

@@ -10,7 +10,7 @@ import {
   WithContext,
   WebPage,
 } from 'schema-dts'
-import config from '../utils/siteConfig'
+import config from '../utils/site-config'
 import {
   ContentfulPage,
   MarkdownRemark,
